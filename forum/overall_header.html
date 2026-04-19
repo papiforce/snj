@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="{L_LANG_HTML}">
   <head>
     <meta charset="{S_CONTENT_ENCODING}" />
@@ -188,169 +188,14 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-
-    <style>
-      /* ======= NAVBAR ======= */
-      header {
-        background: #0d0a06 !important;
-        border-bottom: 1px solid rgba(200, 169, 81, 0.25) !important;
-      }
-      #logo-text {
-        font-family: "Cinzel", serif !important;
-        color: #c8a951 !important;
-        letter-spacing: 3px !important;
-        max-width: calc(100% - 150px);
-      }
-      .forum-description img {
-        max-width: calc(100% - 15px);
-      }
-
-      /* ======= BANNIÈRE CUSTOM ======= */
-      #header-banner {
-        display: none !important; /* On cache l'ancienne bannière */
-      }
-
-      #sengoku-banner {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        cursor: pointer;
-        border-bottom: 2px solid #c8a951;
-        background: #0d0a06;
-      }
-
-      #sengoku-banner .ban-img {
-        width: 100%;
-        height: 320px;
-        object-fit: cover;
-        object-position: 60% center;
-        display: block;
-        filter: brightness(0.7) saturate(0.85);
-        -webkit-mask-image: linear-gradient(
-          180deg,
-          black 0%,
-          black 50%,
-          transparent 100%
-        );
-        mask-image: linear-gradient(
-          180deg,
-          black 0%,
-          black 50%,
-          transparent 100%
-        );
-      }
-
-      #sengoku-banner .ban-content {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px 20px 32px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      #sengoku-banner .ban-label {
-        font-family: "Cinzel", serif;
-        font-size: 10px;
-        letter-spacing: 6px;
-        color: #c8a951;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-      }
-
-      #sengoku-banner .ban-titre {
-        font-family: "Cinzel", serif;
-        font-size: 48px;
-        font-weight: 700;
-        color: #f0e6c8;
-        letter-spacing: 6px;
-        text-transform: uppercase;
-        margin: 0 0 6px 0;
-        opacity: 0;
-        text-shadow:
-          0 0 40px rgba(200, 169, 81, 0.6),
-          0 0 80px rgba(200, 169, 81, 0.25),
-          0 2px 12px rgba(0, 0, 0, 1);
-      }
-
-      #sengoku-banner .ban-sous-titre {
-        font-family: "IM Fell English", Georgia, serif;
-        font-size: 14px;
-        color: #c9a96e;
-        letter-spacing: 3px;
-        font-style: italic;
-        margin: 0;
-      }
-
-      /* Animation titre */
-      .anim-titre {
-        animation: titre-appear 2.5s ease forwards !important;
-      }
-
-      @keyframes titre-appear {
-        from {
-          opacity: 0;
-          letter-spacing: 16px;
-        }
-        to {
-          opacity: 1;
-          letter-spacing: 6px;
-        }
-      }
-
-      /* ======= TICKER NEWS CUSTOM ======= */
-      #sengoku-ticker {
-        background: rgba(200, 169, 81, 0.05);
-        border-bottom: 1px solid rgba(200, 169, 81, 0.2);
-        border-left: 3px solid #c8a951;
-        padding: 8px 16px;
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        overflow: hidden;
-      }
-
-      #sengoku-ticker .tick-label {
-        font-family: "Cinzel", serif;
-        font-size: 9px;
-        letter-spacing: 3px;
-        color: #c8a951;
-        text-transform: uppercase;
-        white-space: nowrap;
-        flex-shrink: 0;
-      }
-
-      #sengoku-ticker .tick-track {
-        overflow: hidden;
-        flex: 1;
-      }
-
-      #sengoku-ticker .tick-text {
-        font-family: "IM Fell English", Georgia, serif;
-        font-size: 12px;
-        color: #c9a96e;
-        font-style: italic;
-        white-space: nowrap;
-        display: inline-block;
-        animation: ticker-scroll 30s linear infinite;
-      }
-
-      @keyframes ticker-scroll {
-        0% {
-          transform: translateX(100vw);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-    </style>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </head>
 
   <body id="top">
@@ -461,7 +306,74 @@
     </div>
     <!-- END switch_like_popup -->
 
-    <!-- NAVBAR FORUMACTIF (on garde l'original) -->
+    <!-- NAVBAR CUSTOM -->
+    <nav id="custom-navbar">
+      <div class="navbar-inner">
+        <button
+          class="nav-burger"
+          id="nav-burger-btn"
+          aria-label="Ouvrir le menu"
+        >
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+
+        <div class="nav-center">
+          <a href="{U_INDEX}" class="nav-link">Accueil</a>
+          <a href="./search" class="nav-link">Rechercher</a>
+          <a href="./memberlist" class="nav-link">Membres</a>
+        </div>
+
+        <div class="nav-right" id="nav-auth"></div>
+      </div>
+    </nav>
+
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <div class="nav-drawer" id="nav-drawer">
+      <a href="{U_INDEX}" class="nav-drawer-link">Accueil</a>
+      <a href="./search" class="nav-drawer-link">Rechercher</a>
+      <a href="./memberlist" class="nav-drawer-link">Membres</a>
+      <div id="nav-drawer-auth"></div>
+    </div>
+
+    <script>
+      $(function () {
+        var burger = document.getElementById("nav-burger-btn");
+        var drawer = document.getElementById("nav-drawer");
+        var overlay = document.getElementById("nav-overlay");
+        var auth = document.getElementById("nav-auth");
+        var drawerAuth = document.getElementById("nav-drawer-auth");
+
+        if (_userdata && _userdata.is_logged_in) {
+          auth.innerHTML =
+            '<a href="{U_LOGIN_LOGOUT}" class="nav-link nav-link--btn">{L_LOGIN_LOGOUT}</a>';
+          drawerAuth.innerHTML =
+            '<a href="{U_LOGIN_LOGOUT}" class="nav-drawer-link">Déconnexion</a>';
+        } else {
+          auth.innerHTML =
+            '<a href="{U_REGISTER}" class="nav-link nav-link--register">Inscription</a>' +
+            '<a href="{U_LOGIN_LOGOUT}" class="nav-link nav-link--btn">Connexion</a>';
+          drawerAuth.innerHTML =
+            '<a href="{U_REGISTER}" class="nav-drawer-link">Inscription</a>' +
+            '<a href="{U_LOGIN_LOGOUT}" class="nav-drawer-link">Connexion</a>';
+        }
+
+        function openDrawer() {
+          drawer.classList.add("is-open");
+          overlay.classList.add("is-open");
+        }
+        function closeDrawer() {
+          drawer.classList.remove("is-open");
+          overlay.classList.remove("is-open");
+        }
+
+        burger.addEventListener("click", function () {
+          drawer.classList.contains("is-open") ? closeDrawer() : openDrawer();
+        });
+        overlay.addEventListener("click", closeDrawer);
+      });
+    </script>
+
     <header>
       <div id="main-menu-btn">
         <i class="material-icons">menu</i>
@@ -536,47 +448,13 @@
     </div>
     <div id="live_notif"></div>
 
-    <!-- ANCIENNE BANNIÈRE CACHÉE (nécessaire pour ForumActif) -->
-    <div id="header-banner" style="display: none">
+    <div id="header-banner">
       <div class="wrap">
         <!-- BEGIN switch_desc -->
         <h2 style="transition: none !important; opacity: 0">
           {switch_desc.SITE_DESCRIPTION}
         </h2>
         <!-- END switch_desc -->
-      </div>
-    </div>
-
-    <!-- ======= NOTRE BANNIÈRE SENGOKU ======= -->
-    <div id="sengoku-banner">
-      <img
-        class="ban-img"
-        src="https://2img.net/i.imgur.com/P0hyYPn.jpeg"
-        alt="Sengoku no Jidai"
-      />
-      <div class="ban-content">
-        <div class="ban-label">&#200;re Sengoku &middot; Guerres des Clans</div>
-        <h1 class="ban-titre">Sengoku no Jidai</h1>
-        <p class="ban-sous-titre">
-          &#x6226;&#x56FD;&#x306E;&#x6642;&#x4EE3; &middot; L&apos;&#200;re des
-          Royaumes en Guerre
-        </p>
-      </div>
-    </div>
-
-    <!-- ======= TICKER NEWS ======= -->
-    <div id="sengoku-ticker">
-      <div class="tick-label">&#10022; Actualit&#233;s</div>
-      <div class="tick-track">
-        <span class="tick-text">
-          &#10022; Le clan Senju repousse une attaque Uchiha dans la for&#234;t
-          des Arbres fleurissants &nbsp;&nbsp;&nbsp;&nbsp; &#10022; Le Daimyo du
-          Pays du Feu convoque les chefs de clan &nbsp;&nbsp;&nbsp;&nbsp;
-          &#10022; Des mercenaires inconnus ont &#233;t&#233; aper&#231;us aux
-          fronti&#232;res du Pays du Vent &nbsp;&nbsp;&nbsp;&nbsp; &#10022;
-          Massacre sanglant au pays de l'herbe, on soupçonne des rituels
-          obscurs. &nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
       </div>
     </div>
 
@@ -604,18 +482,3 @@
   </body>
 </html>
 <!-- END html_validation -->
-
-<script type="text/javascript">
-  // Animation titre au chargement et au survol
-  var banner = document.getElementById("sengoku-banner");
-  var titre = banner.querySelector(".ban-titre");
-
-  function lancerAnimation() {
-    titre.classList.remove("anim-titre");
-    void banner.offsetWidth;
-    titre.classList.add("anim-titre");
-  }
-
-  lancerAnimation();
-  banner.addEventListener("mouseenter", lancerAnimation);
-</script>
