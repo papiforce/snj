@@ -40,25 +40,60 @@
 
 > ⚠️ En AwesomeBB, les variables `{USERNAME}` etc. ne fonctionnent plus directement dans les templates. Elles doivent être appelées via JavaScript avec l'objet `_userdata`.
 
-### Objet `_userdata` (JavaScript)
+### Objet `_userdata` (JavaScript) — propriétés réelles
 
 ```javascript
 _userdata = {
-  username: "PseudoDuMembre", // Pseudo
-  user_id: "42", // ID utilisateur
-  avatar: '<img src="..." />', // Avatar HTML complet
-  rank: "Administrateur", // Rang textuel
-  rank_image: '<img src="..." />', // Image du rang
-  post_count: "1234", // Nombre de messages
-  registered: "01 Jan 2020", // Date d'inscription
-  last_visit: "15 Avr 2026", // Dernière visite
-  birthday: "01 Jan 1990", // Date de naissance
-  age: "36", // Âge
-  group: "Membres", // Groupe principal
-  pm_new: "3", // Nombre de MP non lus
-  is_logged_in: true / false, // Statut connexion
+  // Identité
+  username: "Admin",         // Pseudo
+  user_id: 1,                // ID utilisateur (entier)
+  user_level: 1,             // Niveau : 1 = admin fondateur, 2 = admin, 3 = modérateur, 4 = membre
+  user_lang: "fr",           // Langue de l'interface
+  user_posts: 1,             // Nombre de messages postés
+  user_nb_privmsg: 0,        // Nombre de MP non lus
+  groupcolor: "000099",      // Couleur hex du groupe (sans #)
+
+  // Avatar
+  avatar: '<img loading="lazy" src="https://..." alt="avatar" style="..." />', // HTML complet
+  avatar_link: "https://...", // URL directe de l'image avatar
+
+  // Session
+  session_logged_in: 1,      // 1 si connecté, 0 si visiteur (⚠️ pas "is_logged_in")
+
+  // URLs de navigation (déjà encodées, prêtes à l'emploi)
+  page_home: "/forum",
+  page_login: "/login",
+  page_logout: "/login?logout=1&tid=...&key=...",
+  page_edit_profile: "/profile?mode=editprofile",
+  page_search: "",            // Vide si non configuré
+  page_chatbox: "/chatbox",
+  page_donate: "/buy-credits",
+  page_events: "/events",
+  page_imagelist: "/images",
+  page_publi: "/publi",
+  notifications_page: "/profile?mode=editprofile&page_profil=notifications",
+  register: "/register",
+
+  // Fonctionnalités activées (1 = actif, 0 = inactif)
+  activate_toolbar: 1,       // Toolbar Forumactif visible
+  fix_toolbar: 0,            // Toolbar fixée en haut au scroll
+  chatbox_activate: 0,       // Chatbox activée
+  chat_level: 2,             // Niveau minimum pour accéder au chat
+  darkmode_exist: 1,         // Thème sombre disponible
+  discover_active: 1,        // Page "Découvrir" activée
+  donate: 0,                 // Système de dons actif
+  event_activate: 0,         // Module événements actif
+  imagelist_active: 1,       // Galerie d'images activée
+  notifications: 1,          // Système de notifications actif
+  publication_activate: 0,   // Module publications actif
+
+  // Thème mobile
+  tpl_mobile: "mobi_modern", // Template mobile utilisé
+  tpl_used: "awesomebb",     // Template desktop utilisé
 };
 ```
+
+> ⚠️ **Piège fréquent** : La propriété de connexion est `session_logged_in` (entier 1/0), **pas** `is_logged_in`. Utiliser `_userdata.session_logged_in` dans tout le code JS.
 
 ### Utilisation dans un template
 
@@ -77,7 +112,7 @@ _userdata = {
 ```html
 <!-- Dans le template -->
 <span class="js-username"></span>
-<span class="js-post_count"></span>
+<span class="js-user_posts"></span>
 <div class="js-avatar"></div>
 
 <!-- Dans un script JS (Gestion des JS ou template) -->
@@ -94,7 +129,7 @@ _userdata = {
 
 ```javascript
 $(function () {
-  if (_userdata.is_logged_in) {
+  if (_userdata.session_logged_in) {
     $("#bloc-connecte").show();
     $("#bloc-deconnecte").hide();
     $(".js-username").html(_userdata.username);
@@ -103,6 +138,15 @@ $(function () {
     $("#bloc-deconnecte").show();
   }
 });
+```
+
+**Méthode 4 — Accès aux URLs de navigation via `_userdata`** :
+
+```javascript
+// Préférer les page_* de _userdata aux variables {U_*} dans les scripts JS dynamiques
+var logoutUrl = _userdata.page_logout;
+var profileUrl = _userdata.page_edit_profile;
+var notifUrl   = _userdata.notifications_page;
 ```
 
 ---

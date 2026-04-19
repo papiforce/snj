@@ -87,7 +87,6 @@
       //]]>
     </script>
     <!-- END switch_ticker -->
-
     <script type="text/javascript">
       $(document).scroll(function () {
         var y = $(this).scrollTop();
@@ -102,7 +101,6 @@
         }
       });
     </script>
-
     <!-- BEGIN switch_report_popup -->
     <script type="text/javascript">
       //<![CDATA[
@@ -118,7 +116,6 @@
       }); //]]>
     </script>
     <!-- END switch_report_popup -->
-
     <!-- BEGIN switch_enable_pm_popup -->
     <script type="text/javascript">
       //<![CDATA[
@@ -135,7 +132,6 @@
       //]]>
     </script>
     <!-- END switch_enable_pm_popup -->
-
     <!-- BEGIN switch_login_popup -->
     <script type="text/javascript">
       //<![CDATA[
@@ -145,11 +141,16 @@
         logInPopUpHeight = { LOGIN_POPUP_HEIGHT },
         logInBackgroundResize = true,
         logInBackgroundClass = false;
+
       $(document).ready(function () {
         $(window).resize(function () {
           var windowWidth = document.documentElement.clientWidth;
           var popupWidth = $("#login_popup").width();
-          $("#login_popup").css({ left: windowWidth / 2 - popupWidth / 2 });
+          var mypopup = $("#login_popup");
+
+          $("#login_popup").css({
+            left: windowWidth / 2 - popupWidth / 2,
+          });
         });
       });
       //]]>
@@ -184,17 +185,18 @@
     </script>
     <!-- END google_analytics_code -->
 
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    />
+    <style>
+      .forum-description img {
+        max-width: calc(100% - 15px);
+      }
+    </style>
     <script
       type="module"
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+      src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.esm.js"
     ></script>
     <script
       nomodule
-      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+      src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.js"
     ></script>
   </head>
 
@@ -208,7 +210,7 @@
       <div class="headline">
         {SITENAME}
         <button title="{L_LOGIN_CLOSE}" id="login_popup_close">
-          <i class="material-icons">close</i>
+          <i class="material-symbols-outlined">close</i>
         </button>
       </div>
       <div id="login_popup_content">
@@ -257,7 +259,7 @@
           title="{inactive_users_modal.L_CLOSE}"
           id="inactive_popup_close"
         >
-          <i class="material-icons">close</i>
+          <i class="material-symbols-outlined">close</i>
         </button>
       </div>
       <div id="inactive_popup_message">{inactive_users_modal.L_MODAL_BODY}</div>
@@ -287,7 +289,7 @@
       <div class="headline">
         {SITENAME}
         <button title="{L_LIKE_CLOSE}" id="like_popup_close">
-          <i class="material-icons">close</i>
+          <i class="material-symbols-outlined">close</i>
         </button>
       </div>
       <div id="like_popup_message">{LIKE_POPUP_MSG}</div>
@@ -305,158 +307,160 @@
       </div>
     </div>
     <!-- END switch_like_popup -->
-
-    <!-- NAVBAR CUSTOM -->
     <nav id="custom-navbar">
       <div class="navbar-inner">
-        <button
-          class="nav-burger"
-          id="nav-burger-btn"
-          aria-label="Ouvrir le menu"
-        >
-          <ion-icon name="menu-outline"></ion-icon>
+        <button class="nav-burger" id="nav-burger-btn" aria-label="Menu">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/6499/6499731.png"
+            alt="burger menu"
+          />
         </button>
 
         <div class="nav-center">
-          <a href="{U_INDEX}" class="nav-link">Accueil</a>
-          <a href="./search" class="nav-link">Rechercher</a>
-          <a href="./memberlist" class="nav-link">Membres</a>
+          <a class="nav-link" href="{U_INDEX}">
+            <ion-icon name="home-outline"></ion-icon>
+            Accueil
+          </a>
+          <a class="nav-link" href="{U_SEARCH}">
+            <ion-icon name="search-outline"></ion-icon>
+            Rechercher
+          </a>
+          <a class="nav-link" href="/memberlist">
+            <ion-icon name="people-outline"></ion-icon>
+            Membres
+          </a>
         </div>
-
         <div class="nav-right" id="nav-auth"></div>
       </div>
     </nav>
 
     <div class="nav-overlay" id="nav-overlay"></div>
 
-    <div class="nav-drawer" id="nav-drawer">
-      <a href="{U_INDEX}" class="nav-drawer-link">Accueil</a>
-      <a href="./search" class="nav-drawer-link">Rechercher</a>
-      <a href="./memberlist" class="nav-drawer-link">Membres</a>
-      <div id="nav-drawer-auth"></div>
-    </div>
+    <nav class="nav-drawer" id="nav-drawer">
+      <button
+        class="nav-drawer-close"
+        id="nav-drawer-close"
+        aria-label="Fermer"
+      >
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+      <div id="nav-drawer-user-block"></div>
+      <a class="nav-drawer-link" href="{U_INDEX}">
+        <ion-icon name="home-outline"></ion-icon>
+        Accueil
+      </a>
+      <a class="nav-drawer-link" href="{U_SEARCH}">
+        <ion-icon name="search-outline"></ion-icon>
+        Rechercher
+      </a>
+      <a class="nav-drawer-link" href="/memberlist">
+        <ion-icon name="people-outline"></ion-icon>
+        Membres
+      </a>
+      <div id="nav-drawer-auth-block"></div>
+    </nav>
 
-    <script>
+    <script type="text/javascript">
       $(function () {
-        var burger = document.getElementById("nav-burger-btn");
-        var drawer = document.getElementById("nav-drawer");
-        var overlay = document.getElementById("nav-overlay");
-        var auth = document.getElementById("nav-auth");
-        var drawerAuth = document.getElementById("nav-drawer-auth");
+        var $auth = $("#nav-auth");
+        var $drawerAuth = $("#nav-drawer-auth-block");
+        var $drawerUser = $("#nav-drawer-user-block");
 
-        if (_userdata && _userdata.is_logged_in) {
-          auth.innerHTML =
-            '<a href="{U_LOGIN_LOGOUT}" class="nav-link nav-link--btn">{L_LOGIN_LOGOUT}</a>';
-          drawerAuth.innerHTML =
-            '<a href="{U_LOGIN_LOGOUT}" class="nav-drawer-link">Déconnexion</a>';
+        if (_userdata.session_logged_in == 1) {
+          console.log(_userdata);
+
+          var avatarSrc = _userdata.avatar_link;
+          var username = _userdata.username;
+          var avatarHtml =
+            avatarSrc ?
+              '<img class="nav-avatar__img" src="' +
+              avatarSrc +
+              '" alt="' +
+              username +
+              '">'
+            : '<span class="nav-avatar__initials">' +
+              username.charAt(0).toUpperCase() +
+              "</span>";
+
+          $auth.html(
+            '<div class="nav-avatar-wrap">' +
+              '<button class="nav-avatar" id="nav-avatar-btn" aria-expanded="false">' +
+              avatarHtml +
+              "</button>" +
+              '<div class="nav-dropdown" id="nav-dropdown">' +
+              '<a class="nav-dropdown__item" href="/u' +
+              _userdata.user_id +
+              '">Profil</a>' +
+              '<a class="nav-dropdown__item" href="' +
+              _userdata.page_edit_profile +
+              '">Éditer le profil</a>' +
+              '<div class="nav-dropdown__divider"></div>' +
+              '<a class="nav-dropdown__item nav-dropdown__item--danger" href="' +
+              _userdata.page_logout +
+              '">Déconnexion</a>' +
+              "</div>" +
+              "</div>",
+          );
+
+          $drawerUser.html(
+            '<div class="nav-drawer-user">' +
+              '<div class="nav-drawer-user__avatar">' +
+              avatarHtml +
+              "</div>" +
+              '<span class="nav-drawer-user__name">' +
+              username +
+              "</span>" +
+              "</div>",
+          );
+
+          $("#nav-avatar-btn").on("click", function (e) {
+            e.stopPropagation();
+            var $dd = $("#nav-dropdown");
+            var open = $dd.hasClass("is-open");
+            $dd.toggleClass("is-open", !open);
+            $(this).attr("aria-expanded", String(!open));
+          });
+
+          $(document).on("click", function () {
+            $("#nav-dropdown").removeClass("is-open");
+            $("#nav-avatar-btn").attr("aria-expanded", "false");
+          });
         } else {
-          auth.innerHTML =
-            '<a href="{U_REGISTER}" class="nav-link nav-link--register">Inscription</a>' +
-            '<a href="{U_LOGIN_LOGOUT}" class="nav-link nav-link--btn">Connexion</a>';
-          drawerAuth.innerHTML =
-            '<a href="{U_REGISTER}" class="nav-drawer-link">Inscription</a>' +
-            '<a href="{U_LOGIN_LOGOUT}" class="nav-drawer-link">Connexion</a>';
+          $auth.html(
+            '<a class="nav-link nav-link--register" href="' +
+              _userdata.register +
+              '">Inscription</a>' +
+              '<a class="nav-link nav-link--btn" href="' +
+              _userdata.page_login +
+              '">Connexion</a>',
+          );
+
+          $drawerAuth.html(
+            '<div style="padding: 16px 24px; border-top: 1px solid rgba(200,169,81,0.15); margin-top: 8px; display: flex; gap: 8px;">' +
+              '<a class="nav-link nav-link--register" href="' +
+              _userdata.register +
+              '">Inscription</a>' +
+              '<a class="nav-link nav-link--btn" href="' +
+              _userdata.page_login +
+              '">Connexion</a>' +
+              "</div>",
+          );
         }
 
         function openDrawer() {
-          drawer.classList.add("is-open");
-          overlay.classList.add("is-open");
+          $("#nav-drawer").addClass("is-open");
+          $("#nav-overlay").addClass("is-open");
         }
         function closeDrawer() {
-          drawer.classList.remove("is-open");
-          overlay.classList.remove("is-open");
+          $("#nav-drawer").removeClass("is-open");
+          $("#nav-overlay").removeClass("is-open");
         }
 
-        burger.addEventListener("click", function () {
-          drawer.classList.contains("is-open") ? closeDrawer() : openDrawer();
-        });
-        overlay.addEventListener("click", closeDrawer);
+        $("#nav-burger-btn").on("click", openDrawer);
+        $("#nav-drawer-close").on("click", closeDrawer);
+        $("#nav-overlay").on("click", closeDrawer);
       });
     </script>
-
-    <header>
-      <div id="main-menu-btn">
-        <i class="material-icons">menu</i>
-      </div>
-      <a id="logo-link" href="{U_INDEX}">
-        <div id="logo">
-          <!-- BEGIN switch_logo_mob -->
-          <img
-            src="{switch_logo_mob.LOGO_MOB}"
-            alt="{L_INDEX}"
-            loading="lazy"
-          />
-          <!-- END switch_logo_mob -->
-        </div>
-        <!-- BEGIN switch_h1 -->
-        <span id="logo-text">{switch_h1.MAIN_SITENAME}</span>
-        <!-- END switch_h1 -->
-      </a>
-      <!-- BEGIN switch_user_logged_out -->
-      <a href="{S_LOGIN_ACTION}" class="button">{L_LOGIN}</a>
-      <!-- END switch_user_logged_out -->
-      <!-- BEGIN switch_user_logged_in -->
-      <a href="javascript:void(0)" id="header-user"></a>
-      <a href="javascript:void(0)" id="header-notif"
-        ><i class="material-icons">notifications</i></a
-      >
-      <!-- END switch_user_logged_in -->
-      <form method="get" action="{ACTION_SEARCH}" id="search-main">
-        <input
-          type="text"
-          name="search_keywords"
-          maxlength="128"
-          placeholder="{L_SEARCH}"
-        />
-        <button type="submit"><i class="material-icons">search</i></button>
-      </form>
-      <ul id="header-navigation">
-        <li>
-          <a id="navigation-home" href="{NAVIGATION_HOME}"
-            ><i class="material-icons">apps</i>{L_FORUM}</a
-          >
-        </li>
-        <li>
-          <a id="navigation-recent" href="/latest"
-            ><i class="material-icons">comment</i>{L_TOPICS}</a
-          >
-        </li>
-        <!-- BEGIN discover_active -->
-        <li>
-          <a id="navigation-discover" href="/discover"
-            ><i class="material-icons">history</i>{L_TOPICS}</a
-          >
-        </li>
-        <!-- END discover_active -->
-      </ul>
-    </header>
-
-    <div id="main-menu" class="hidden">
-      <div class="main-menu-headline">{SITENAME}</div>
-    </div>
-    <div id="main-user-menu" class="hidden"></div>
-    <div id="notif-menu" class="hidden">
-      <div class="main-menu-headline" data-text="_lang['Notifications']"></div>
-      <ul id="notif_list">
-        <li id="notif-view-all">
-          <a
-            href="/profile?mode=editprofile&page_profil=notifications"
-            data-text="_lang['Notif_see_all']"
-          ></a>
-        </li>
-      </ul>
-    </div>
-    <div id="live_notif"></div>
-
-    <div id="header-banner">
-      <div class="wrap">
-        <!-- BEGIN switch_desc -->
-        <h2 style="transition: none !important; opacity: 0">
-          {switch_desc.SITE_DESCRIPTION}
-        </h2>
-        <!-- END switch_desc -->
-      </div>
-    </div>
 
     <div id="wrap">
       <!-- BEGIN switch_ticker -->
@@ -479,6 +483,7 @@
 
       <!-- BEGIN html_validation -->
     </div>
+    <!-- <div id="wrap" /> -->
   </body>
 </html>
 <!-- END html_validation -->

@@ -252,7 +252,15 @@ console.log(_userdata); // Voir toutes les propriétés disponibles
 
 // Exemple : afficher le pseudo dans un div custom
 document.getElementById("mon-pseudo").innerHTML = _userdata.username;
+
+// Vérifier si l'utilisateur est connecté
+if (_userdata.session_logged_in) { /* ... */ }
+
+// MP non lus
+var pmCount = _userdata.user_nb_privmsg;
 ```
+
+> ⚠️ **Pièges courants** : utiliser `session_logged_in` (pas `is_logged_in`) et `user_nb_privmsg` (pas `pm_new`). Voir `references/variables.md` pour la liste complète des propriétés réelles.
 
 ### Cibler des éléments AwesomeBB
 

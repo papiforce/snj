@@ -23,7 +23,7 @@ $(function () {
   });
 
   // Gérer l'état connecté/déconnecté
-  if (_userdata.is_logged_in) {
+  if (_userdata.session_logged_in) {
     $(".show-logged-in").show();
     $(".show-logged-out").hide();
   } else {
@@ -45,7 +45,7 @@ Usage dans le template `overall_header` :
 <!-- Bloc visible seulement si connecté -->
 <div class="show-logged-in" style="display:none;">
   Bonjour <span class="js-username"></span> !
-  <a href="{U_PRIVATEMAIL}">MP (<span class="js-pm_new"></span>)</a>
+  <a href="{U_PRIVATEMAIL}">MP (<span class="js-user_nb_privmsg"></span>)</a>
 </div>
 
 <!-- Bloc visible si non connecté -->
@@ -96,7 +96,7 @@ $(function () {
 
 ```javascript
 $(function () {
-  var pmCount = parseInt(_userdata.pm_new || 0);
+  var pmCount = parseInt(_userdata.user_nb_privmsg || 0);
   if (pmCount > 0) {
     // Ajouter un badge rouge
     $("#pm-icon").append('<span class="pm-badge">' + pmCount + "</span>");
