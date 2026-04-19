@@ -1,0 +1,58 @@
+<!-- BEGIN html_validation -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <body>
+    <!-- END html_validation -->
+    <div
+      id="inactive_popup"
+      class="block-subtle privmsgs_popup"
+      style="margin: 0; width: 100%; height: 100%; z-index: 10001 !important"
+    >
+      <div class="headline">
+        {L_SEARCH_USERNAME}
+        <button
+          onclick="window.close()"
+          title="{L_CLOSE_WINDOW}"
+          id="inactive_popup_close"
+        >
+          <i class="material-icons" style="font-weight: bold">close</i>
+        </button>
+      </div>
+      <div>
+        <form action="{S_SEARCH_ACTION}" method="post" name="search">
+          <i>{L_SEARCH_EXPLAIN}</i>
+          <input
+            class="inputbox tiny"
+            type="text"
+            name="search_username"
+            value="{USERNAME}"
+          />
+          <input
+            class="button1"
+            type="submit"
+            name="search"
+            value="{L_SEARCH}"
+          /><br /><br />
+          <!-- BEGIN switch_select_name -->
+          <select name="username_list">
+            {S_USERNAME_OPTIONS}
+          </select>
+          <input
+            class="button2"
+            type="button"
+            name="use"
+            value="{L_SELECT}"
+            onclick="
+              refresh_username(
+                this.form.username_list.options[
+                  this.form.username_list.selectedIndex
+                ].value,
+              )
+            "
+          />
+          <!-- END switch_select_name -->
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

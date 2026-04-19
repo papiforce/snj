@@ -1,0 +1,80 @@
+<!-- BEGIN googlemap -->
+<div>
+  <br />
+  <iframe
+    frameborder="0"
+    scrolling="no"
+    width="100%"
+    height="450"
+    src="{googlemap.U_GOOGLEMAP}"
+  ></iframe>
+  <br />
+  <br />
+</div>
+<!-- END googlemap -->
+
+<div class="page-header">
+  <h1>{TOTAL_REGISTERED_USERS_ONLINE}</h1>
+</div>
+<p>{TOTAL_GUEST_USERS_ONLINE}</p>
+
+<br />
+
+<table class="table1 table-resp" cellspacing="1">
+  <thead>
+    <tr>
+      <th class="name">{L_USERNAME}</th>
+      <th class="active">{L_LAST_UPDATE}</th>
+      <th class="info">{L_FORUM_LOCATION}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- BEGIN reg_user_row -->
+    <tr class="{reg_user_row.ROW_CLASS}">
+      <td class="usrlistbg" data-th="{L_USERNAME}&nbsp;&colon;&nbsp;">
+        <a href="{reg_user_row.U_USER_PROFILE}">{reg_user_row.USERNAME}</a>
+      </td>
+      <td data-th="{L_LAST_UPDATE}&nbsp;&colon;&nbsp;">
+        {reg_user_row.LASTUPDATE}
+      </td>
+      <td data-th="{L_FORUM_LOCATION}&nbsp;&colon;&nbsp;">
+        <a href="{reg_user_row.U_FORUM_LOCATION}"
+          >{reg_user_row.FORUM_LOCATION}</a
+        >
+      </td>
+    </tr>
+    <!-- END reg_user_row -->
+    <!-- BEGIN bot_user_row -->
+    <tr class="{bot_user_row.ROW_CLASS}">
+      <td class="usrlistbg" data-th="{L_USERNAME}&nbsp;&colon;&nbsp;">
+        {bot_user_row.USERNAME}
+      </td>
+      <td data-th="{L_LAST_UPDATE}&nbsp;&colon;&nbsp;">
+        {bot_user_row.LASTUPDATE}
+      </td>
+      <td data-th="{L_FORUM_LOCATION}&nbsp;&colon;&nbsp;">
+        <a href="{bot_user_row.U_FORUM_LOCATION}"
+          >{bot_user_row.FORUM_LOCATION}</a
+        >
+      </td>
+    </tr>
+    <!-- END bot_user_row -->
+    <!-- BEGIN guest_user_row -->
+    <tr class="{guest_user_row.ROW_CLASS}">
+      <td class="usrlistbg" data-th="{L_USERNAME}&nbsp;&colon;&nbsp;">
+        {guest_user_row.USERNAME}
+      </td>
+      <td data-th="{L_LAST_UPDATE}&nbsp;&colon;&nbsp;">
+        {guest_user_row.LASTUPDATE}
+      </td>
+      <td data-th="{L_FORUM_LOCATION}&nbsp;&colon;&nbsp;">
+        <a href="{guest_user_row.U_FORUM_LOCATION}"
+          >{guest_user_row.FORUM_LOCATION}</a
+        >
+      </td>
+    </tr>
+    <!-- END guest_user_row -->
+  </tbody>
+</table>
+
+<p>{L_ONLINE_EXPLAIN}</p>

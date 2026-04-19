@@ -1,0 +1,68 @@
+<div class="page-header">
+  <h1>{TITLE_ACTIVITY_FEED}</h1>
+</div>
+<div class="dropdown dropdown-latest">
+  <div class="btn btn-default">
+    <i class="material-icons">history</i><span>{TITLE_ACTIVITY_FEED}</span>
+  </div>
+  <ul class="dropdown-box">
+    <li class="activetab">
+      <a href="javascript:void(0);"
+        ><i class="material-icons">history</i
+        ><span>{TITLE_ACTIVITY_FEED}</span></a
+      >
+    </li>
+    <li>
+      <a href="/latest"
+        ><i class="material-icons">forum</i><span>{L_LATEST}</span></a
+      >
+    </li>
+    <li>
+      <a href="/newest"
+        ><i class="material-icons">comment</i><span>{L_NEWEST}</span></a
+      >
+    </li>
+  </ul>
+</div>
+<div id="activity-page">
+  <!-- BEGIN no_activity -->
+  <div class="block">
+    <div class="block-content">{no_activity.INFO}</div>
+  </div>
+  <!-- END no_activity -->
+  <!-- BEGIN has_activity -->
+  <!-- BEGIN activity_date_group -->
+  <div class="activity-date-group block">
+    <div class="block-header">
+      <i class="material-icons">access_time_filled</i>
+      <span>{has_activity.activity_date_group.FORMATTED_DATE}</span>
+    </div>
+    <ol class="block-content activity-feed">
+      <!-- BEGIN activity_feed_item -->
+      <li
+        class="feed-item activity-type-{has_activity.activity_date_group.activity_feed_item.TYPE} {has_activity.activity_date_group.activity_feed_item.EXTRA_CLASS}"
+        style="
+          --activity-image: url({has_activity.activity_date_group.activity_feed_item.U_AVATAR});
+        "
+      >
+        <time
+          class="time"
+          datetime="{has_activity.activity_date_group.activity_feed_item.DATETIME}"
+          title="{has_activity.activity_date_group.activity_feed_item.DATETIME}"
+        >
+          {has_activity.activity_date_group.activity_feed_item.TIME_FORMATTED}
+        </time>
+        <div class="text">
+          {has_activity.activity_date_group.activity_feed_item.ACTIVITY}
+        </div>
+      </li>
+      <!-- END activity_feed_item -->
+    </ol>
+  </div>
+  <!-- END activity_date_group -->
+  <div class="activity-end">
+    <span>{has_activity.L_ACTIVITY_END}</span>
+  </div>
+  {JS_COLLAPSE}
+  <!-- END has_activity -->
+</div>

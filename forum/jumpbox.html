@@ -1,0 +1,19 @@
+<!-- BEGIN spacer --><br /><!-- END spacer -->
+<form
+  action="{S_JUMPBOX_ACTION}"
+  method="get"
+  name="jumpbox"
+  onsubmit="
+    if (document.jumpbox.f.value == -1) {
+      return false;
+    }
+  "
+>
+  <label>
+    <span>{L_JUMP_TO}:</span>
+    <div class="jumpbox-wrap">
+      {S_JUMPBOX_SELECT}
+      <input class="btn btn-default" type="submit" value="{L_GO}" />
+    </div>
+  </label>
+</form>

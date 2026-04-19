@@ -1,0 +1,97 @@
+<div class="page-header">
+  <h1>{PAGE_TITLE}</h1>
+</div>
+
+<form action="{S_MODE_ACTION}" method="get" id="form-block">
+  <div class="quick-options">
+    <div class="option">
+      <input
+        type="text"
+        class="inputbox"
+        name="username"
+        maxlength="25"
+        size="25"
+        placeholder="{L_USER_SELECT}"
+        value="{L_USER_SELECT_VALUE}"
+      />
+    </div>
+    <span class="mobile-hidden">
+      <div class="option memberlist-select">
+        <div class="option-title">{L_SELECT_SORT_METHOD}:</div>
+        {S_MODE_SELECT}
+      </div>
+      <div class="option">
+        <div class="option-title">{L_ORDER}:</div>
+        {S_ORDER_SELECT}
+      </div>
+    </span>
+    {S_HIDDEN_SID}
+    <input
+      class="btn btn-default"
+      type="submit"
+      name="submit"
+      value="{L_SUBMIT}"
+    />
+  </div>
+</form>
+
+<div class="members-block" id="memberlist">
+  <!-- BEGIN memberrow -->
+  <div class="member-block {memberrow.ROW_CLASS}">
+    <div class="avatar-default avatar-medium text-center">
+      <div>{memberrow.AVATAR_IMG}</div>
+      <div><i>#{memberrow.ROW_NUMBER}</i></div>
+    </div>
+    <div class="member-rigth">
+      <div class="member-header">
+        <span class="member-icons">
+          {memberrow.WWW_IMG}
+          <!-- BEGIN switch_td_pm -->{memberrow.PM_IMG}<!-- END switch_td_pm -->
+        </span>
+        <a href="{memberrow.U_VIEWPROFILE}">{memberrow.USERNAME}</a>
+      </div>
+      <div class="member-details">
+        <!-- BEGIN switch_mood -->
+        <div>
+          <i class="material-icons">emoji_emotions</i>
+          <b>{L_INTERESTS}:</b> {memberrow.INTERESTS}
+        </div>
+        <!-- END switch_mood -->
+        <div>
+          <i class="material-icons">message</i>
+          <b>{L_POSTS}:</b> {memberrow.POSTS}
+        </div>
+        <div>
+          <i class="material-icons">perm_contact_calendar</i>
+          <b>{L_JOINED}:</b> {memberrow.JOINED}
+        </div>
+        <div>
+          <i class="material-icons">watch_later</i>
+          <b>{L_VISITED}:</b> {memberrow.LASTVISIT}
+        </div>
+        <!-- BEGIN switch_td_group -->
+        <div>
+          <i class="material-icons">group</i>
+          <b>{L_GROUPS}:</b> {memberrow.GROUPS}
+        </div>
+        <!-- END switch_td_group -->
+        <!-- BEGIN switch_td_point -->
+        <div>
+          <i class="material-icons">emoji_events</i>
+          <b>{L_POINT}:</b> {memberrow.POINTS}
+        </div>
+        <!-- END switch_td_point -->
+      </div>
+    </div>
+  </div>
+  <!-- END memberrow -->
+  <!-- BEGIN switch_no_user -->
+  <div class="member-block">{switch_no_user.L_NO_USER}</div>
+  <!-- END switch_no_user -->
+</div>
+
+<div class="pagination">
+  <!-- BEGIN switch_pagination -->
+  {PAGINATION}
+  <!-- END switch_pagination -->
+</div>

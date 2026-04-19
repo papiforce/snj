@@ -1,0 +1,512 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+/* ── Variables ────────────────────────────────────────────── */
+
+:root {
+  --bg: #000000;
+  --text: #ffffff;
+  --text-secondary: #f0e6c8;
+  --text-muted: #c9a96e;
+  --accent: #c8a951;
+  --accent-light: #d4b96b;
+  --border: rgba(200, 169, 81, 0.2);
+  --border-strong: rgba(200, 169, 81, 0.4);
+  --card-bg: rgba(200, 169, 81, 0.03);
+  --card-hover: rgba(200, 169, 81, 0.07);
+  --card-header: rgba(200, 169, 81, 0.08);
+  --font-heading: "Exo 2", sans-serif;
+  --font-body: "Nunito", sans-serif;
+  --transition: 0.2s ease;
+}
+
+/* ── Reset ────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Global ───────────────────────────────────────────────── */
+
+body,
+#phpbb,
+.page-body {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: var(--font-body) !important;
+  font-optical-sizing: auto !important;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(200, 169, 81, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 169, 81, 0.6);
+}
+
+/* ── Typographie ──────────────────────────────────────────── */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading) !important;
+  font-optical-sizing: auto !important;
+  color: var(--accent) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-weight: 500 !important;
+}
+
+a {
+  color: var(--accent) !important;
+  text-decoration: none !important;
+  transition: color var(--transition) !important;
+}
+
+a:hover {
+  color: var(--text) !important;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+
+#page-body,
+.wrap {
+  background: transparent !important;
+  max-width: 1140px !important;
+  margin: 0 auto !important;
+}
+
+/* ── Navbar / Header ──────────────────────────────────────── */
+
+header,
+#page-top,
+.navbar,
+.nav-header {
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#logo,
+.brand,
+.navbar .brand,
+.nav-header .brand {
+  font-family: var(--font-heading) !important;
+  color: var(--accent) !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+
+#custom-navbar .nav-links a,
+.navlinks a,
+#main-menu a,
+#user-menu a {
+  font-family: var(--font-body) !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
+  transition: color var(--transition) !important;
+}
+
+#custom-navbar .nav-links a:hover,
+.navlinks a:hover,
+#main-menu a:hover,
+#user-menu a:hover {
+  color: var(--accent) !important;
+}
+
+/* ── Divider helper ───────────────────────────────────────── */
+
+.divider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.divider__line {
+  flex: 1;
+  height: 1px;
+  background: var(--accent-light);
+}
+
+.divider__dot {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-light);
+}
+
+/* ── Index — Catégories ───────────────────────────────────── */
+
+.forum-list .forum-header,
+.category-header,
+.cat_no_new > .row1,
+.cat_new > .row1 {
+  background: var(--card-header) !important;
+  border: 1px solid var(--border) !important;
+  font-family: var(--font-heading) !important;
+  color: var(--accent) !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Index — Lignes forum ─────────────────────────────────── */
+
+.forum-list .forum-row,
+.forum-item,
+.forum_no_new,
+.forum_new {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-top: none !important;
+  color: var(--text-muted) !important;
+  transition: background var(--transition) !important;
+}
+
+.forum-list .forum-row:hover,
+.forum-item:hover,
+.forum_no_new:hover,
+.forum_new:hover {
+  background: var(--card-hover) !important;
+}
+
+.forum-title a {
+  font-family: var(--font-heading) !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+}
+
+.forum-title a:hover {
+  color: var(--accent) !important;
+}
+
+.forum-desc,
+.forum-desc a {
+  font-family: var(--font-body) !important;
+  font-style: italic !important;
+  color: var(--text-muted) !important;
+  font-size: 12px !important;
+}
+
+/* ── Liste des sujets (viewforum) ─────────────────────────── */
+
+.post_new,
+.post_no_new,
+.folder_sticky,
+.folder_locked,
+.folder_announce,
+.folder_global {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  border-top: none !important;
+  color: var(--text-muted) !important;
+  transition: background var(--transition) !important;
+}
+
+.post_new:hover,
+.post_no_new:hover,
+.folder_sticky:hover,
+.folder_locked:hover {
+  background: var(--card-hover) !important;
+}
+
+.topictitle,
+.topictitle a {
+  font-family: var(--font-heading) !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  letter-spacing: 1px !important;
+}
+
+.topictitle a:hover {
+  color: var(--accent) !important;
+}
+
+/* ── Posts (viewtopic) ────────────────────────────────────── */
+
+.post,
+.post-wrap,
+.post-container {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+  margin-bottom: 8px !important;
+}
+
+.post + .post,
+.post-wrap + .post-wrap {
+  border-top: 1px solid var(--border) !important;
+}
+
+.postbody,
+.post-content {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-body) !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+}
+
+.postprofile,
+.post-author,
+.post-sidebar {
+  background: rgba(200, 169, 81, 0.05) !important;
+  border-right: 1px solid var(--border) !important;
+}
+
+.username,
+.postauthor,
+.post-author a {
+  font-family: var(--font-heading) !important;
+  color: var(--accent) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  font-size: 13px !important;
+}
+
+.rank-title,
+.postrank {
+  font-family: var(--font-body) !important;
+  color: var(--text-muted) !important;
+  font-size: 12px !important;
+  font-style: italic !important;
+}
+
+.post-avatar img,
+.avatar img {
+  border-radius: 0 !important;
+  border: 1px solid var(--border) !important;
+}
+
+/* ── Barre d'infos ────────────────────────────────────────── */
+
+.info-bar,
+.legend-bar {
+  background: rgba(200, 169, 81, 0.05) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+}
+
+/* ── Statistiques ─────────────────────────────────────────── */
+
+.forum-statistics,
+.stats-block {
+  background: rgba(200, 169, 81, 0.04) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+  font-style: italic !important;
+}
+
+/* ── Boutons ──────────────────────────────────────────────── */
+
+.btn,
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+  background: rgba(200, 169, 81, 0.1) !important;
+  border: 1px solid rgba(200, 169, 81, 0.3) !important;
+  color: var(--accent) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+  padding: 8px 20px !important;
+  cursor: pointer !important;
+  transition: background var(--transition), color var(--transition) !important;
+}
+
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+  background: rgba(200, 169, 81, 0.2) !important;
+  color: var(--text) !important;
+}
+
+/* ── Formulaires ──────────────────────────────────────────── */
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+textarea,
+select {
+  background: var(--bg) !important;
+  border: 1px solid rgba(200, 169, 81, 0.3) !important;
+  border-radius: 0 !important;
+  color: var(--text) !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  padding: 8px 12px !important;
+  outline: none !important;
+  transition: border-color var(--transition) !important;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(200, 169, 81, 0.8) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.6 !important;
+}
+
+/* ── Pagination ───────────────────────────────────────────── */
+
+.pagination:not(strong) {
+  color: var(--text-muted) !important;
+  font-family: var(--font-body) !important;
+}
+
+.pagination a,
+.pagination:not(strong) a {
+  color: var(--accent) !important;
+  border: 1px solid var(--border) !important;
+  padding: 4px 10px !important;
+  margin: 0 2px !important;
+  transition: background var(--transition) !important;
+}
+
+.pagination a:hover,
+.pagination:not(strong) a:hover {
+  background: var(--card-hover) !important;
+  color: var(--text) !important;
+}
+
+.pagination strong,
+.pagination .current {
+  color: var(--text) !important;
+  border: 1px solid var(--border-strong) !important;
+  padding: 4px 10px !important;
+  margin: 0 2px !important;
+  background: rgba(200, 169, 81, 0.12) !important;
+}
+
+/* ── Profil ───────────────────────────────────────────────── */
+
+#profile-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border) !important;
+}
+
+#profile-card .avatar img {
+  border-radius: 0 !important;
+  border: 1px solid var(--border) !important;
+}
+
+#profile-card .info,
+#profile-card .stats {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-body) !important;
+}
+
+#profile-card .stat {
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--text-muted) !important;
+  font-size: 13px !important;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+
+#custom-footer,
+.footer-content {
+  background: var(--bg) !important;
+  border-top: 1px solid var(--border) !important;
+  color: var(--accent) !important;
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+}
+
+#footer-top {
+  display: none !important;
+}
+
+/* ── Éditeur de messages / BBcode bar ────────────────────── */
+
+.sceditor-toolbar,
+.sceditor-container {
+  background: var(--bg) !important;
+  border-color: var(--border) !important;
+}
+
+.sceditor-button div {
+  filter: invert(0.8) sepia(1) saturate(2) hue-rotate(5deg) !important;
+}
+
+/* ── Messages système ─────────────────────────────────────── */
+
+.error-box,
+.warning-box,
+.success-box {
+  border-radius: 0 !important;
+  font-family: var(--font-body) !important;
+}
+
+.error-box {
+  background: rgba(194, 0, 0, 0.1) !important;
+  border: 1px solid rgba(194, 0, 0, 0.4) !important;
+  color: #ff6b6b !important;
+}
+
+.success-box {
+  background: rgba(2, 194, 123, 0.1) !important;
+  border: 1px solid rgba(2, 194, 123, 0.4) !important;
+  color: #02c27b !important;
+}
+
+/* ── Responsive — 768px ───────────────────────────────────── */
+
+@media (max-width: 768px) {
+  #page-body,
+  .wrap {
+    padding: 0 16px !important;
+  }
+
+  h1 { font-size: 28px !important; }
+  h2 { font-size: 22px !important; }
+  h3 { font-size: 18px !important; }
+
+  .divider { margin: 20px 0; }
+}
+
+/* ── Responsive — 480px ───────────────────────────────────── */
+
+@media (max-width: 480px) {
+  h1 { font-size: 22px !important; }
+  h2 { font-size: 18px !important; }
+
+  .btn,
+  button,
+  input[type="submit"] {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}

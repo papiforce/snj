@@ -1,0 +1,133 @@
+<!-- BEGIN topics_grid_box -->
+<!-- BEGIN row -->
+<!-- BEGIN header_table -->
+<div class="posts">
+  <div class="posts-header">
+    <h2 class="posts-title">
+      <i class="material-icons">{topics_grid_box.row.ICON}</i>
+      <span>{topics_grid_box.row.L_TITLE}</span>
+    </h2>
+  </div>
+  <div class="grid-section">
+    <!-- END header_table -->
+    <!-- BEGIN header_row -->
+    <strong>{topics_grid_box.row.L_TITLE}</strong>
+    <!-- END header_row -->
+    <!-- BEGIN topic -->
+    <!-- BEGIN table_sticky -->
+  </div>
+</div>
+<div class="posts">
+  <div class="posts-header">
+    <h2 class="posts-title">
+      <i class="material-icons">description</i>
+      <span>{topics_grid_box.row.topic.table_sticky.L_TITLE}</span>
+    </h2>
+  </div>
+  <div class="grid-section">
+    <!-- END table_sticky -->
+    <!-- BEGIN line_sticky -->
+    <div class="sticky-separator posts-header"></div>
+    <!-- END line_sticky -->
+    <div class="topic-card">
+      <a href="{topics_grid_box.row.U_VIEW_TOPIC}">
+        <div
+          class="cover-image"
+          style="
+            --cover-image: url(&quot;{topics_grid_box.row.U_FB_IMAGE}&quot;);
+          "
+        >
+          <div
+            class="posts-icon {topics_grid_box.row.FOLDER_CLASSNAME} {topics_grid_box.row.TOPIC_READ_STATUS}"
+            title="{topics_grid_box.row.L_TOPIC_FOLDER_ALT}"
+          >
+            <i class="material-icons">chat_bubble</i>
+          </div>
+          <div class="stats">
+            <span data-tooltip="{L_VIEWS}"
+              ><i class="material-icons">visibility</i>
+              {topics_grid_box.row.VIEWS}</span
+            >
+            <span data-tooltip="{L_REPLIES}"
+              ><i class="material-icons">forum</i>
+              {topics_grid_box.row.REPLIES}</span
+            >
+          </div>
+          <div class="topic-type {topics_grid_box.row.FOLDER_CLASSNAME}">
+            {topics_grid_box.row.TOPIC_TYPE}
+          </div>
+          <div
+            class="avatar-default author-avatar"
+            title="{topics_grid_box.row.L_CREATED_ON_BY}"
+          >
+            {topics_grid_box.row.TOPIC_AUTHOR_AVATAR}
+            <div class="participate-check">
+              {topics_grid_box.row.PARTICIPATE_POST_IMG}
+            </div>
+          </div>
+        </div>
+      </a>
+      <div class="content">
+        <div>
+          <!-- BEGIN single_selection -->
+          <span class="radio">
+            <input
+              type="radio"
+              name="{topics_grid_box.FIELDNAME}"
+              value="{topics_grid_box.row.FID}"
+              {topics_grid_box.row.L_SELECT}
+            />
+            <span class="radio-check"></span>
+          </span>
+          <!-- END single_selection -->
+          <a href="{topics_grid_box.row.U_VIEW_TOPIC}">
+            <h3>{topics_grid_box.row.TOPIC_TITLE}</h3>
+          </a>
+        </div>
+        <div class="description">{topics_grid_box.row.FIRST_POST_TEXT_110}</div>
+        <div class="card-footer">
+          <div class="avatar-default">
+            <!-- BEGIN avatar -->
+            {topics_grid_box.row.topic.avatar.LAST_POST_AVATAR}
+            <!-- END avatar -->
+            {topics_grid_box.row.LAST_POST_AUTHOR}
+          </div>
+          <div class="time" title="{L_LASTPOST}">
+            <a
+              class="posts-lastpost-time"
+              href="{topics_grid_box.row.LAST_POST_IMG}"
+            >
+              <i class="material-icons">access_time</i
+              >{topics_grid_box.row.LAST_POST_TIME}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END topic -->
+    <!-- BEGIN no_topics -->
+    <div class="posts-section posts-empty">
+      {topics_grid_box.row.L_NO_TOPICS}
+    </div>
+    <!-- END no_topics -->
+    <!-- BEGIN bottom -->
+  </div>
+</div>
+<!-- END bottom -->
+<!-- END row -->
+<!-- END topics_grid_box -->
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".author-avatar").each(function () {
+      if (!$(this).find(".participate-check").is(":empty")) {
+        $(this)
+          .find(".participate-check")
+          .html(
+            '<i class="material-icons" title="' +
+              $(this).find(".participate-check").children("img").attr("title") +
+              '">reply</i>',
+          );
+      }
+    });
+  });
+</script>

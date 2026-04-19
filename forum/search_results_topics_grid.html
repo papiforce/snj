@@ -1,0 +1,153 @@
+<div class="page-header">
+  <h1>{L_SEARCH_MATCHES}</h1>
+  <!-- BEGIN navmenu -->
+  <div id="breadcrumbs">
+    <a href="{U_INDEX}"
+      ><i class="material-icons">home</i> <span>{L_INDEX}</span></a
+    >
+    {L_SEARCH_TITLE}
+  </div>
+  <!-- END navmenu -->
+  <!-- BEGIN navmenu_latest -->
+  <div class="dropdown dropdown-latest">
+    <div class="btn btn-default">
+      <i class="material-icons">{navmenu_latest.I_ACTIVE_TAB}</i
+      ><span>{navmenu_latest.L_ACTIVE_TAB}</span>
+    </div>
+    <ul class="dropdown-box">
+      <li class="activetab">
+        <a href="javascript:void(0);"
+          ><i class="material-icons">{navmenu_latest.I_ACTIVE_TAB}</i
+          ><span>{navmenu_latest.L_ACTIVE_TAB}</span></a
+        >
+      </li>
+      <li>
+        <a href="{navmenu_latest.U_OTHER_TAB}"
+          ><i class="material-icons">{navmenu_latest.I_OTHER_TAB}</i
+          ><span>{navmenu_latest.L_OTHER_TAB}</span></a
+        >
+      </li>
+      <!-- BEGIN tab_discover -->
+      <li>
+        <a href="/discover"
+          ><i class="material-icons">history</i
+          ><span>{navmenu_latest.tab_discover.L_DISCOVER_TAB}</span></a
+        >
+      </li>
+      <!-- END tab_discover -->
+    </ul>
+  </div>
+  <!-- END navmenu_latest -->
+  <div class="pagination">
+    <!-- BEGIN switch_display_grid -->
+    <div
+      id="switch_display"
+      onclick="setSearchDisplayGrid()"
+      class="button btn btn-flat mark-buttons"
+    >
+      <i class="material-icons">{ICON_DISPLAY_NAME}</i>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".topic-card").each(function () {
+          if (!$(this).find(".participate-check").is(":empty")) {
+            $(this)
+              .find(".participate-check")
+              .html(
+                '<i class="material-icons" title="' +
+                  $(this)
+                    .find(".participate-check")
+                    .children("img")
+                    .attr("title") +
+                  '">reply</i>',
+              );
+          }
+        });
+      });
+      function setSearchDisplayGrid() {
+        var d = new Date();
+        var cookie_string = "_search_display_grid={V_DISPLAY_GRID}";
+        d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+        var expires = d.toUTCString();
+        cookie_string += "; path=/";
+        cookie_string += "; domain=" + window.location.hostname;
+        cookie_string += "; expires=" + expires;
+        document.cookie = cookie_string;
+        location.reload();
+      }
+    </script>
+    <!-- END switch_display_grid -->
+    {PAGINATION}
+  </div>
+</div>
+
+<form
+  action="{S_ACTION}"
+  method="post"
+  name="post"
+  onsubmit="return verify_select();"
+>
+  <div class="grid-section search_results">
+    <!-- BEGIN searchresults -->
+    <div class="topic-card">
+      <div
+        class="cover-image"
+        style="--cover-image: url(&quot;{searchresults.U_FB_IMAGE}&quot;)"
+      >
+        <a href="{searchresults.U_VIEW_TOPIC}" class="topic-card-viewtopic"></a>
+        <div
+          class="posts-icon {searchresults.ICON_CLASS} {searchresults.TOPIC_READ_STATUS}"
+          title="{searchresults.L_TOPIC_FOLDER_ALT}"
+        >
+          <i class="material-icons">{searchresults.ICON_NAME}</i>
+          <div class="participate-check">
+            {searchresults.PARTICIPATE_POST_IMG}
+          </div>
+        </div>
+        <div class="stats">
+          <span data-tooltip="{L_VIEWS}"
+            ><i class="material-icons">visibility</i>
+            {searchresults.VIEWS}</span
+          >
+          <span data-tooltip="{L_REPLIES}"
+            ><i class="material-icons">forum</i> {searchresults.REPLIES}</span
+          >
+        </div>
+        <div class="topic-type {searchresults.ICON_CLASS}">
+          <a href="{searchresults.U_VIEW_FORUM}">{searchresults.FORUM_NAME}</a>
+        </div>
+      </div>
+      <div class="content">
+        <div>
+          <!-- BEGIN single_selection -->
+          <span class="radio">
+            <input
+              type="radio"
+              name="{searchresults.FIELDNAME}"
+              value="{searchresults.FID}"
+              {searchresults.L_SELECT}
+            />
+            <span class="radio-check"></span>
+          </span>
+          <!-- END single_selection -->
+          <a href="{searchresults.U_VIEW_TOPIC}">
+            <h3>{searchresults.TOPIC_TITLE}</h3>
+          </a>
+        </div>
+        <div class="description">{searchresults.FIRST_POST_TEXT_110}</div>
+        <div class="card-footer">
+          <div class="author">
+            <i class="material-icons">person</i>{searchresults.TOPIC_AUTHOR}
+          </div>
+          <div class="time" title="{L_LASTPOST}">
+            <i class="material-icons">reply_all</i
+            >{searchresults.LAST_POST_AUTHOR}, {searchresults.LAST_POST_TIME}
+            {searchresults.LAST_POST_IMG}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END searchresults -->
+  </div>
+  <div class="pagination">{PAGINATION}</div>
+</form>

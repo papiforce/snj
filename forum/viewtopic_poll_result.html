@@ -1,0 +1,49 @@
+<div class="block block-big">
+  <div class="block-header">
+    <h2>
+      <i class="material-icons">poll</i>
+      <span>{POLL_QUESTION}</span>
+      <span style="float: right">{CLOSE_POLL}</span>
+    </h2>
+  </div>
+  <div class="block-content">
+    <dl class="poll">
+      <!-- BEGIN poll_option -->
+      <dt>{poll_option.POLL_OPTION_CAPTION}</dt>
+      <dd>
+        <div class="poll-bar-wrap">
+          <span class="poll-num">{poll_option.POLL_OPTION_RESULT}</span>
+          <div
+            class="poll-bar"
+            style="width: {poll_option.POLL_OPTION_PERCENT};"
+          >
+            <span class="poll-percent">{poll_option.POLL_OPTION_PERCENT}</span>
+          </div>
+        </div>
+      </dd>
+      <!-- BEGIN option_voters -->
+      <dd>
+        <p class="option_voters_list">
+          {poll_option.option_voters.POLL_OPTION_VOTERS}
+        </p>
+      </dd>
+      <!-- END option_voters -->
+      <!-- END poll_option -->
+      <dt class="poll-total">{L_TOTAL_VOTES}:</dt>
+      <dd class="poll-total">{TOTAL_VOTES}</dd>
+    </dl>
+    <!-- BEGIN cancel_vote -->
+    <a href="{U_CANCEL_VOTE}" class="btn btn-default">{L_CANCEL_VOTE}</a>
+    <!-- END cancel_vote -->
+    <!-- BEGIN switch_hide_result -->
+    <div id="hide_result_msg">{L_POLL_HIDE_RESULT}</div>
+    <!-- END switch_hide_result -->
+    <!-- BEGIN switch_back_to_vote -->
+    <a href="{switch_back_to_vote.U_BACK_TO_VOTE}" class="btn btn-flat"
+      >{switch_back_to_vote.L_BACK}</a
+    >
+    <!-- END switch_back_to_vote -->
+    <div id="vote_expire">{L_VOTE_EXPIRE}</div>
+    {ALL_POLL_VOTERS_LIST}
+  </div>
+</div>
