@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chronologie du Sekai</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--or:#c9a84c;--or-pale:#e8d090;--fond:#08090c;--fond2:#0e1016;--texte:#dde0e8;--texte-dim:#6a7080;--sep:rgba(201,168,76,.2);--sep2:rgba(201,168,76,.1);
+--c-myth:#8b5cf6;--c-myth-pale:#c4b5fd;
+--c-ancien:#c0392b;--c-ancien-pale:#f4a080;
+--c-form:#2563eb;--c-form-pale:#93c5fd;
+--c-sengoku:#d97706;--c-sengoku-pale:#fcd34d;
+--c-actuel:#059669;--c-actuel-pale:#6ee7b7}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fond);color:var(--texte);font-family:'Cormorant Garamond',Georgia,serif;overflow-x:hidden}
+
+/* HERO */
+.hero{position:relative;width:100%;height:480px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:url('https://i.pinimg.com/736x/9a/88/8a/9a888a3ad4abf450a604a2dc130b53b0.jpg') center 30%/cover no-repeat;filter:brightness(.28) saturate(.9);transform:scale(1.04)}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(to bottom,var(--fond) 0%,transparent 20%,transparent 60%,var(--fond) 100%),linear-gradient(to right,var(--fond) 0%,transparent 12%,transparent 88%,var(--fond) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 24px}
+.hero-kanji{font-family:'Noto Serif JP',serif;font-size:3.2rem;font-weight:300;color:var(--or-pale);letter-spacing:.2em;display:block;line-height:1;text-shadow:0 0 40px rgba(201,168,76,.2)}
+.hero-title{font-family:'Cinzel',serif;font-size:1rem;letter-spacing:.4em;color:var(--or);text-transform:uppercase;margin-top:10px;display:block}
+.hero-sub{font-size:.75rem;color:var(--texte-dim);letter-spacing:.15em;font-style:italic;margin-top:6px}
+
+/* LÉGENDE ÈRES */
+.legend{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;padding:28px 24px 20px}
+.leg-item{display:flex;align-items:center;gap:7px;font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--texte-dim);cursor:pointer;padding:6px 12px;border:1px solid rgba(255,255,255,.06);transition:color .2s,border-color .2s}
+.leg-item:hover,.leg-item.active{color:var(--texte);border-color:var(--sep)}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* FILTRES */
+.filters{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:0 24px 28px}
+.f-btn{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(255,255,255,.1);color:var(--texte-dim);background:none;cursor:pointer;transition:all .2s}
+.f-btn:hover,.f-btn.on{color:var(--or);border-color:var(--sep)}
+
+/* TIMELINE */
+.timeline{max-width:860px;margin:0 auto;padding:0 24px 60px;position:relative}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--sep2) 5%,var(--sep2) 95%,transparent);transform:translateX(-50%)}
+
+/* ERE HEADER */
+.era-header{text-align:center;padding:20px 0 12px;position:relative;z-index:1}
+.era-tag{display:inline-block;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;padding:5px 18px;border:1px solid;margin-bottom:4px}
+.era-name{font-family:'Noto Serif JP',serif;font-size:1.1rem;font-weight:300;letter-spacing:.15em}
+
+/* ENTRÉE */
+.entry{display:flex;margin-bottom:4px;position:relative;opacity:0;transform:translateY(14px);transition:opacity .4s,transform .4s}
+.entry.visible{opacity:1;transform:translateY(0)}
+.entry.left{flex-direction:row-reverse}
+.entry-spacer{flex:1;min-width:0}
+.entry-content{flex:1;min-width:0;padding:0 32px}
+.entry.left .entry-content{text-align:right;padding:0 32px}
+
+/* NODE central */
+.entry-node{position:absolute;left:50%;top:20px;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;border:2px solid;flex-shrink:0;z-index:2;transition:transform .2s}
+.entry:hover .entry-node{transform:translateX(-50%) scale(1.5)}
+
+/* CARD */
+.entry-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);padding:14px 16px;transition:background .2s,border-color .2s;position:relative}
+.entry-card::before{content:'';position:absolute;top:19px;width:22px;height:1px;background:var(--sep2)}
+.entry.right .entry-card::before{left:-22px}
+.entry.left .entry-card::before{right:-22px;left:auto}
+.entry-card:hover{background:rgba(255,255,255,.04);border-color:var(--sep)}
+.entry-an{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.2em;color:var(--texte-dim);text-transform:uppercase;display:block;margin-bottom:4px}
+.entry-title{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.06em;margin-bottom:7px;line-height:1.3}
+.entry-text{font-size:.83rem;line-height:1.72;color:var(--texte)}
+.entry-text em{color:var(--or-pale);font-style:italic}
+
+/* TAGS */
+.entry-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:9px}
+.entry.left .entry-tags{justify-content:flex-end}
+.e-tag{font-family:'Cinzel',serif;font-size:.46rem;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border:1px solid rgba(255,255,255,.1);color:var(--texte-dim)}
+
+/* EXPAND */
+.expand-btn{font-family:'Cinzel',serif;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;background:none;border:none;color:var(--texte-dim);cursor:pointer;padding:6px 0 0;display:block;transition:color .2s}
+.expand-btn:hover{color:var(--or)}
+.expand-content{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.expand-content.open{max-height:300px}
+.expand-inner{padding-top:10px;font-size:.8rem;line-height:1.7;color:var(--texte-dim);border-top:1px solid rgba(255,255,255,.05);margin-top:8px}
+.expand-inner em{color:var(--or-pale);font-style:italic}
+
+/* HIDDEN */
+.entry.hidden{display:none}
+
+@media(max-width:640px){
+  .timeline::before{left:16px}
+  .entry,.entry.left{flex-direction:column}
+  .entry-spacer{display:none}
+  .entry-content,.entry.left .entry-content{padding:0 0 0 38px;text-align:left}
+  .entry-node{left:16px}
+  .entry-card::before,.entry.left .entry-card::before{left:-22px;right:auto}
+  .entry.left .entry-tags{justify-content:flex-start}
+}
+</style>
+</head>
+<body><div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <span class="hero-kanji">世界の歴史</span>
+    <span class="hero-title">Chronologie du Sekai</span>
+    <span class="hero-sub">Des origines oubliées à l'ère actuelle</span>
+  </div>
+</div><div class="legend">
+  <div class="leg-item active" data-era="all">
+    <div class="leg-dot" style="background:#666"></div>Toutes les ères
+  </div>
+  <div class="leg-item" data-era="myth">
+    <div class="leg-dot" style="background:var(--c-myth)"></div>Ère mythique
+  </div>
+  <div class="leg-item" data-era="ancien">
+    <div class="leg-dot" style="background:var(--c-ancien)"></div>Ère ancienne
+  </div>
+  <div class="leg-item" data-era="form">
+    <div class="leg-dot" style="background:var(--c-form)"></div>Stabilisation
+  </div>
+  <div class="leg-item" data-era="sengoku">
+    <div class="leg-dot" style="background:var(--c-sengoku)"></div>Ère Sengoku
+  </div>
+  </div>
+</div><div class="timeline" id="timeline">
+
+  <!-- ═══ ÈRE MYTHIQUE ═══ -->
+  <div class="era-header" data-era="myth">
+    <div class="era-tag" style="color:var(--c-myth-pale);border-color:rgba(139,92,246,.35)">Ère Mythique</div>
+    <div class="era-name" style="color:var(--c-myth-pale)">Les origines oubliées</div>
+  </div>
+
+  <div class="entry right" data-era="myth">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An ???</span>
+        <div class="entry-title" style="color:var(--c-myth-pale)">L'ère des Yokai</div>
+        <div class="entry-text">L'humanité prospère tranquillement. Il s'agit d'une ère oubliée où l'on compte les histoires de Kami, de Yokai ainsi que de grandes batailles perdues. La plupart des secrets ancestraux de cette formidable époque sont malheureusement perdus.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Même à l'heure d'aujourd'hui, les archéologues peinent à en percer les secrets. Quelques bribes parlent d'une divinité ayant émergé de l'abysse, qui aurait elle-même donné naissance à l'être que le monde entier connaît sous le nom du <em>Rikudo Sennin</em>.</div></div>
+        <div class="entry-tags"><span class="e-tag">Yokai</span><span class="e-tag">Origines</span><span class="e-tag">Mystère</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-myth);border-color:var(--c-myth-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="myth">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-myth);border-color:var(--c-myth-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An ???</span>
+        <div class="entry-title" style="color:var(--c-myth-pale)">Naissance du Ninshuu</div>
+        <div class="entry-text">Les historiens ne parviennent pas à dater cette période. On y relate les aventures de l'ermite Rikudo, érudit béni par les dieux afin d'accomplir des miracles. C'est ici que naissent le mouvement Ninshuu et le chakra.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">La légende relate le voyage d'un homme sans nom qui, au terme de son chemin, adoptera celui de <em>Rikudo</em> pour les six voies qu'il enseignera à ses fidèles. Des adeptes dévieront ces enseignements : le Ninshuu sera transformé au-delà des montagnes de Fer en Bushi, qui donnera naissance au pays du Fer. "Sur Terre comme dans le ciel, moi seul mérite d'être honoré."</div></div>
+        <div class="entry-tags"><span class="e-tag">Rikudo</span><span class="e-tag">Ninshuu</span><span class="e-tag">Chakra</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="myth">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An ??? &mdash; Lacune historique</span>
+        <div class="entry-title" style="color:var(--c-myth-pale)">La Guerre Céleste & la disparition</div>
+        <div class="entry-text">Tout un pan de l'histoire est manquant. Le dernier grand événement notifié est la Guerre Céleste, une vaste bataille qui aurait marqué la disparition de l'ermite Rikudo.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">On raconte que des démons crachés par les étoiles seraient venus ravager le monde. Les derniers écrits relatent une guerre majeure ayant bouleversé l'humanité tout entière, qui manqua d'être réduite à néant. <em>Le pays des tourbillons est cité comme théâtre de ce sinistre événement.</em> C'est à partir de cette période que le chakra se propagea aux hommes.</div></div>
+        <div class="entry-tags"><span class="e-tag">Guerre Céleste</span><span class="e-tag">Bijuu</span><span class="e-tag">Lacune</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-myth);border-color:var(--c-myth-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <!-- ═══ ÈRE ANCIENNE ═══ -->
+  <div class="era-header" data-era="ancien">
+    <div class="era-tag" style="color:var(--c-ancien-pale);border-color:rgba(192,57,43,.35)">Ère Ancienne</div>
+    <div class="era-name" style="color:var(--c-ancien-pale)">Les premières fondations</div>
+  </div>
+
+  <div class="entry left" data-era="ancien">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 1</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Mort de l'ermite Rikudo &mdash; Naissance des grands clans</div>
+        <div class="entry-text">Le calendrier commence ici. La mort du sage des six chemins laisse derrière lui ses fidèles et une descendance qui se dilue peu à peu. Les grands clans émergent : Senju, Uzumaki, Uchiha, Hyuga, Nara, Akimichi, Yamanaka, Aburame.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Nés des premières scissions, les fidèles de l'ermite se divisent en plusieurs mouvements qui commenceront à engendrer des conflits ancestraux durables. En parallèle, d'étranges créatures gigantesques apparaissent dans diverses régions : <em>c'est la naissance du mythe des bijuus</em>. Le pays de la Foudre se forme à cette même période, dès la disparition de Rikudo dans les montagnes foudroyantes.</div></div>
+        <div class="entry-tags"><span class="e-tag">Rikudo</span><span class="e-tag">Grands clans</span><span class="e-tag">Bijuu</span><span class="e-tag">Kaminari no Kuni</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="ancien">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 3</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Formation des grands pays</div>
+        <div class="entry-text">Suivant l'exemple de Kaminari et grâce à plusieurs personnalités influentes comme Kenjiro Toyori pour le pays du Feu, les grands pays se forment. On relate par ailleurs le début du conflit Uchiha/Senju.</div>
+        <div class="entry-tags"><span class="e-tag">Hi no Kuni</span><span class="e-tag">Toyori</span><span class="e-tag">Uchiha/Senju</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="ancien">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 5</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Naissance de Mizu no Kuni &mdash; Kyujo le pirate</div>
+        <div class="entry-text">Le pays de l'Eau naissant est confronté à un conflit d'une cruauté sans pareille. Terumi Kyujo, le pirate le plus influent et mauvais de son temps, entreprend des raids de plus en plus brutaux. Sa cruauté n'a aucune limite.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Le clan le plus influent de la région, les Hoshigaki, s'y opposèrent. Leur championne <em>Hoshigaki Samehada</em> s'interposa et le défit. Kyujo rusa et rassembla les Kaguya pour exterminer le clan Hoshigaki. Samehada aurait combattu durant trois jours et trois nuits avant de rendre son dernier souffle, maudissant jusqu'au bout Kyujo. Ce dernier fonda le pays de l'Eau par la suite.</div></div>
+        <div class="entry-tags"><span class="e-tag">Mizu no Kuni</span><span class="e-tag">Hoshigaki</span><span class="e-tag">Kyujo</span><span class="e-tag">Kaguya</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="ancien">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 6</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Ichibi &mdash; Naissance de Kaze no Kuni</div>
+        <div class="entry-text">Ichibi, le démon à une queue, annihile tout un territoire et le transforme entièrement en désert. Les survivants se rassemblent dans un élan de solidarité, donnant naissance aux prémices du pays du Vent.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Suite au carnage provoqué par Ichibi, certains survivants s'éveillent à <em>la capacité de manipuler le sable</em> : c'est l'apparition du clan Sabaku.</div></div>
+        <div class="entry-tags"><span class="e-tag">Ichibi</span><span class="e-tag">Kaze no Kuni</span><span class="e-tag">Clan Sabaku</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="ancien">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 35</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Formation d'Uzu no Kuni &mdash; Émergence du clan Uzumaki</div>
+        <div class="entry-text">Uzu no Kuni est formé par plusieurs communautés locales. C'est un lieu prospère et de savoir. Le clan Uzumaki émerge de là, descendants de l'ermite Rikudo selon les légendes, possédant un savoir mystique jalousement gardé.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Le territoire est victime d'attaques nombreuses de Kyuubi, le renard à neuf queues. Malgré de nombreux sacrifices de la part des locaux, <em>les attaques ne semblent jamais s'arrêter.</em></div></div>
+        <div class="entry-tags"><span class="e-tag">Uzu no Kuni</span><span class="e-tag">Uzumaki</span><span class="e-tag">Kyuubi</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="ancien">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 75</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Scellement de Kyuubi &mdash; Uzumaki Abe</div>
+        <div class="entry-text">Après une attaque particulièrement violente, Kyuubi manque d'annihiler le territoire. Uzumaki Abe met au point une technique secrète permettant de sceller le démon en lui.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Le sceau instable parvient néanmoins à confiner la calamité. Après de nombreuses études, Abe arrivera à la conclusion que <em>sceller ce monstre dans un hôte féminin et jeune augmente la qualité de la technique</em>. Ainsi, de génération en génération, Kyuubi sera scellé dans un hôte féminin par le clan Uzumaki.</div></div>
+        <div class="entry-tags"><span class="e-tag">Kyuubi</span><span class="e-tag">Fuinjutsu</span><span class="e-tag">Uzumaki Abe</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="ancien">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-ancien);border-color:var(--c-ancien-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 80</span>
+        <div class="entry-title" style="color:var(--c-ancien-pale)">Éruption volcanique &mdash; Déclin de Tsuchi no Kuni</div>
+        <div class="entry-text">Une éruption volcanique frappe Tsuchi no Kuni, plongeant le pays dans une crise sans précédent. Tetsu en profite pour grappiller du territoire, tandis que plusieurs clans quittent le pays. C'est le début du déclin, et ces conditions difficiles donnent naissance au clan Goka.</div>
+        <div class="entry-tags"><span class="e-tag">Tsuchi no Kuni</span><span class="e-tag">Tetsu</span><span class="e-tag">Clan Goka</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FORMATION ═══ -->
+  <div class="era-header" data-era="form">
+    <div class="era-tag" style="color:var(--c-form-pale);border-color:rgba(37,99,235,.35)">Prospérité</div>
+    <div class="era-name" style="color:var(--c-form-pale)">Stabilisation & premiers conflits</div>
+  </div>
+
+  <div class="entry right" data-era="form">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 100</span>
+        <div class="entry-title" style="color:var(--c-form-pale)">Période de paix relative</div>
+        <div class="entry-text">La plupart des pays se stabilisent, une courte période de paix s'installe. Tsuchi no Kuni se remet lentement mais ne retrouvera jamais sa grandeur. Le culte des six voies à Kaminari no Kuni gagne en popularité.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Plusieurs clans majeurs ont migré hors de Tsuchi no Kuni, laissant le pays devenir la cible des samouraïs. La criminalité s'y installe, de nombreux bandits y émergent. Hi no Kuni prospère malgré la rivalité Uchiha/Senju, devenant de plus en plus instable.</div></div>
+        <div class="entry-tags"><span class="e-tag">Stabilisation</span><span class="e-tag">Kaminari</span><span class="e-tag">Hi no Kuni</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-form);border-color:var(--c-form-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <!-- ═══ SENGOKU ═══ -->
+  <div class="era-header" data-era="sengoku">
+    <div class="era-tag" style="color:var(--c-sengoku-pale);border-color:rgba(217,119,6,.35)">Ère Sengoku</div>
+    <div class="era-name" style="color:var(--c-sengoku-pale)">L'âge des États en guerre</div>
+  </div>
+
+  <div class="entry left" data-era="sengoku">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 103</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Début de l'ère Sengoku</div>
+        <div class="entry-text">Le monde est sous la coupe de plusieurs grands pays tandis que les daimyos se font la guerre pour grappiller du territoire et mènent des intrigues politiques. Tetsu no Kuni voit un nouvel empereur à sa tête, prêt à dominer le monde. C'est le début de l'ère Sengoku.</div>
+        <div class="entry-tags"><span class="e-tag">Sengoku</span><span class="e-tag">Tetsu</span><span class="e-tag">Daimyo</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="sengoku">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 106</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Disparition d'Uzu no Kuni &mdash; Naissance de Noroi no Kuni</div>
+        <div class="entry-text">Le pays des tourbillons disparaît. Une catastrophe inconnue ravage la totalité des terres, engloutissant des archipels, détruisant les traces de civilisation. Les rares îles épargnées deviennent inhospitalières.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Ce lieu est désormais considéré comme maudit : <em>Noroi no Kuni</em>. L'opprobre est jetée sur le clan Uzumaki, tenu responsable de l'incident en raison de l'étude de savoirs interdits. Le clan restera soudé et occupera une île du pays de l'Eau, luttant pour se préserver des influences néfastes extérieures.</div></div>
+        <div class="entry-tags"><span class="e-tag">Noroi no Kuni</span><span class="e-tag">Uzumaki</span><span class="e-tag">Catastrophe</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="sengoku">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 108</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Apparition des On'ei &mdash; 怨影</div>
+        <div class="entry-text">Sur les îles alentour de Noroi no Kuni, la plupart des habitants deviennent totalement fous et souffrent de mutations anormales. On blâme les Uzumaki pour avoir ouvert une porte vers un autre monde.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">Les individus frappés par cette malédiction sont nommés <em>On'ei — esprits vengeurs</em>. On raconte que les esprits des morts de Noroi no Kuni viendraient les hanter et les rendraient fous. Un peu partout dans le monde, d'étranges phénomènes ont lieu.</div></div>
+        <div class="entry-tags"><span class="e-tag">On'ei</span><span class="e-tag">Malédiction</span><span class="e-tag">Noroi no Kuni</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="sengoku">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 109</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Libération de Kyuubi &mdash; Mort de Toyori Kinsen</div>
+        <div class="entry-text">Alors que le clan Uzumaki se rendait à une rencontre organisée par le clan Senju, une terrible embuscade a lieu. Le sceau retenant Kyuubi s'affaiblit, le bijuu est libéré en plein territoire du pays du Feu et provoque un carnage sans nom.</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">La plupart des clans shinobi s'allient pour retenir la bête. Uchiha Shinsei et Senju Isamu maîtrisent ensemble le bijuu, qui est de nouveau scellé par le clan Uzumaki. Durant l'incident, le daimyo <em>Toyori Kinsen est tué</em>. Son fils Toyori Kinji endosse le rôle de seigneur du Feu, blâme les clans et fonde l'ordre des douze ninja gardiens.</div></div>
+        <div class="entry-tags"><span class="e-tag">Kyuubi</span><span class="e-tag">Shinsei</span><span class="e-tag">Isamu</span><span class="e-tag">Toyori Kinji</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="sengoku">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 112</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Trêve Senju & Uchiha</div>
+        <div class="entry-text">La collaboration entre Senju et Uchiha pour arrêter Kyuubi amène une vague de paix entre les deux clans. Le conflit diminue en intensité, les deux chefs se retirent pour laisser place à leurs enfants qui vont tenter de bâtir un avenir de paix.</div>
+        <div class="entry-tags"><span class="e-tag">Paix</span><span class="e-tag">Senju</span><span class="e-tag">Uchiha</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="sengoku">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 113</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Effondrement de Tsuchi no Kuni &mdash; Tensions avec Kaze no Kuni</div>
+        <div class="entry-text">Tsuchi no Kuni s'effondre peu à peu, devenant de plus en plus instable avec les incursions de Tetsu no Kuni et la présence de nombreux bandits, dont un groupe dirigé par le roi des "bêtes".</div>
+        <button class="expand-btn" onclick="toggle(this)">Lire la suite +</button>
+        <div class="expand-content"><div class="expand-inner">En parallèle, des rumeurs indiquent que <em>Kaze no Kuni est impliqué dans l'embuscade</em> ayant provoqué la mort du daimyo du pays du Feu. Des tensions montent entre les deux pays.</div></div>
+        <div class="entry-tags"><span class="e-tag">Tsuchi no Kuni</span><span class="e-tag">Tetsu</span><span class="e-tag">Kaze no Kuni</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <!-- ═══ ACTUEL ═══ -->
+  <div class="era-header" data-era="actuel">
+    <div class="era-tag" style="color:var(--c-actuel-pale);border-color:rgba(5,150,105,.35)">Ère Actuelle</div>
+    <div class="era-name" style="color:var(--c-actuel-pale)">An 115 à nos jours</div>
+  </div>
+
+  <div class="entry left" data-era="sengoku">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 115</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Guerre ouverte Senju & Uchiha</div>
+        <div class="entry-text">Le pays du Feu connaît un conflit d'une violence sans précédent. Suite au meurtre de l'héritière Senju par l'héritier Uchiha, la guerre reprend avec dix fois plus d'intensité. Les autres clans profitent de la situation pour consolider leurs frontières ou s'étendre.</div>
+        <div class="entry-tags"><span class="e-tag">Guerre</span><span class="e-tag">Senju</span><span class="e-tag">Uchiha</span><span class="e-tag">Hi no Kuni</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="sengoku">
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 116</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Grande prison de Mizu no Kuni</div>
+        <div class="entry-text">Le pays de l'Eau inaugure une gigantesque prison où les criminels les plus dangereux du pays seront envoyés pour le reste de leurs jours.</div>
+        <div class="entry-tags"><span class="e-tag">Mizu no Kuni</span><span class="e-tag">Prison</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+  <div class="entry left" data-era="sengoku">
+    <div class="entry-spacer"></div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale)"></div>
+    <div class="entry-content">
+      <div class="entry-card">
+        <span class="entry-an">An 118</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">Nouvel Empereur de Tetsu no Kuni</div>
+        <div class="entry-text">Tetsu no Kuni, le pays des samouraïs, dispose d'un tout nouvel empereur. Ce dernier est dix fois plus agressif dans sa politique et entreprend d'étendre son territoire.</div>
+        <div class="entry-tags"><span class="e-tag">Tetsu no Kuni</span><span class="e-tag">Expansion</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="entry right" data-era="sengoku">
+    <div class="entry-content">
+      <div class="entry-card" style="border-color:rgba(5,150,105,.4);background:rgba(5,150,105,.06)">
+        <span class="entry-an">An 120 &mdash; Époque actuelle</span>
+        <div class="entry-title" style="color:var(--c-sengoku-pale)">L'histoire est entre vos mains</div>
+        <div class="entry-text">Toute l'histoire est désormais entre vos mains. À vous de l'écrire.</div>
+        <div class="entry-tags"><span class="e-tag" style="color:var(--c-sengoku-pale);border-color:rgba(5,150,105,.4)">Présent</span></div>
+      </div>
+    </div>
+    <div class="entry-node" style="background:var(--c-sengoku);border-color:var(--c-sengoku-pale);width:14px;height:14px;top:18px"></div>
+    <div class="entry-spacer"></div>
+  </div>
+
+</div>
+
+<script>
+function toggle(btn){
+  var ec=btn.nextElementSibling;
+  var open=ec.classList.toggle('open');
+  btn.textContent=open?'Réduire -':'Lire la suite +';
+}
+
+var legItems=document.querySelectorAll('.leg-item');
+var entries=document.querySelectorAll('.entry[data-era]');
+var eraHeaders=document.querySelectorAll('.era-header[data-era]');
+
+legItems.forEach(function(item){
+  item.addEventListener('click',function(){
+    legItems.forEach(function(l){l.classList.remove('active')});
+    item.classList.add('active');
+    var era=item.dataset.era;
+    entries.forEach(function(e){
+      e.classList.toggle('hidden',era!=='all'&&e.dataset.era!==era);
+    });
+    eraHeaders.forEach(function(h){
+      h.style.display=(era==='all'||h.dataset.era===era)?'':'none';
+    });
+  });
+});
+
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:.12});
+document.querySelectorAll('.entry').forEach(function(e){obs.observe(e)});
+</script>
+</body>
+</html>

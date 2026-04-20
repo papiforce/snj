@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rangs & Progression</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --or: #c9a84c;
+        --or-pale: #e8d090;
+        --fond: #09090b;
+        --fond2: #0f0f13;
+        --texte: #e4ddd0;
+        --texte-dim: #857a68;
+        --sep: rgba(201, 168, 76, 0.22);
+        --sep2: rgba(201, 168, 76, 0.1);
+        --rc: #6b9fd4;
+        --rb: #74c69d;
+        --ra: #e07070;
+        --rs: #b39ddb;
+        --rsup: #c9a84c;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--fond);
+        color: var(--texte);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 420px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url("https://cmsapi-frontend.naruto-official.com/site/api/naruto/Image/get?path=/naruto/import/images/naruto02/301%EF%BD%9E400/376/C034.jpg") center 20% / cover no-repeat;
+        filter: brightness(0.28) saturate(0.85);
+        transform: scale(1.04);
+      }
+      .hero-vignette {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, var(--fond) 0%, transparent 20%, transparent 60%, var(--fond) 100%), linear-gradient(to right, var(--fond) 0%, transparent 12%, transparent 88%, var(--fond) 100%);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 24px;
+      }
+      .hero-kanji {
+        font-family: "Noto Serif JP", serif;
+        font-size: 2.8rem;
+        font-weight: 300;
+        color: var(--or-pale);
+        letter-spacing: 0.2em;
+        display: block;
+        line-height: 1;
+      }
+      .hero-title {
+        font-family: "Cinzel", serif;
+        font-size: 1rem;
+        letter-spacing: 0.42em;
+        color: var(--or);
+        text-transform: uppercase;
+        margin-top: 10px;
+        display: block;
+      }
+      .hero-sub {
+        font-size: 0.75rem;
+        color: var(--texte-dim);
+        letter-spacing: 0.15em;
+        font-style: italic;
+        margin-top: 6px;
+      }
+      .ornement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 26px 24px 18px;
+      }
+      .ornement-line {
+        flex: 1;
+        height: 1px;
+        max-width: 200px;
+        background: linear-gradient(to right, transparent, var(--sep), var(--or), var(--sep), transparent);
+      }
+      .ornement-sym {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        color: var(--or);
+        letter-spacing: 0.3em;
+        opacity: 0.75;
+      }
+      .main {
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 0 24px 60px;
+      }
+      .section {
+        margin-bottom: 50px;
+      }
+      .section-title {
+        font-family: "Cinzel", serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.38em;
+        text-transform: uppercase;
+        color: var(--or);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, var(--sep), transparent);
+      }
+      .prose {
+        font-size: 0.93rem;
+        color: var(--texte);
+        line-height: 1.85;
+      }
+      .prose + .prose {
+        margin-top: 13px;
+      }
+      .prose em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .intro-box {
+        border: 1px solid var(--sep2);
+        background: var(--fond2);
+        border-left: 1px solid var(--sep);
+        padding: 14px 18px;
+        margin-bottom: 28px;
+      }
+      .intro-box p {
+        font-size: 0.88rem;
+        line-height: 1.75;
+        color: var(--texte);
+      }
+      .intro-box em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .rang-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 16px;
+      }
+      .rang-card {
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-left: 3px solid;
+        overflow: hidden;
+      }
+      .rang-card.rc {
+        border-left-color: var(--rc);
+      }
+      .rang-card.rb {
+        border-left-color: var(--rb);
+      }
+      .rang-card.ra {
+        border-left-color: var(--ra);
+      }
+      .rang-card.rs {
+        border-left-color: var(--rs);
+      }
+      .rang-card.rsup {
+        border-left-color: var(--rsup);
+      }
+      .rang-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 18px 0;
+      }
+      .rang-badge {
+        font-family: "Cinzel", serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        padding: 3px 10px;
+        border: 1px solid;
+      }
+      .rang-card.rc .rang-badge {
+        color: var(--rc);
+        border-color: rgba(107, 159, 212, 0.4);
+      }
+      .rang-card.rb .rang-badge {
+        color: var(--rb);
+        border-color: rgba(116, 198, 157, 0.4);
+      }
+      .rang-card.ra .rang-badge {
+        color: var(--ra);
+        border-color: rgba(224, 112, 112, 0.4);
+      }
+      .rang-card.rs .rang-badge {
+        color: var(--rs);
+        border-color: rgba(179, 157, 219, 0.4);
+      }
+      .rang-card.rsup .rang-badge {
+        color: var(--rsup);
+        border-color: rgba(201, 168, 76, 0.4);
+      }
+      .rang-title {
+        font-family: "Cinzel", serif;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+      }
+      .rang-card.rc .rang-title {
+        color: var(--rc);
+      }
+      .rang-card.rb .rang-title {
+        color: var(--rb);
+      }
+      .rang-card.ra .rang-title {
+        color: var(--ra);
+      }
+      .rang-card.rs .rang-title {
+        color: var(--rs);
+      }
+      .rang-card.rsup .rang-title {
+        color: var(--rsup);
+      }
+      .rang-body {
+        padding: 10px 18px 16px;
+      }
+      .rang-desc {
+        font-size: 0.84rem;
+        line-height: 1.72;
+        color: var(--texte);
+        margin-bottom: 12px;
+      }
+      .rang-desc em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .xp-wrap {
+        margin-top: 8px;
+      }
+      .xp-label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      .xp-label-text {
+        font-family: "Cinzel", serif;
+        font-size: 0.5rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--texte-dim);
+      }
+      .xp-label-val {
+        font-family: "Cinzel", serif;
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+      }
+      .rang-card.rc .xp-label-val {
+        color: var(--rc);
+      }
+      .rang-card.rb .xp-label-val {
+        color: var(--rb);
+      }
+      .rang-card.ra .xp-label-val {
+        color: var(--ra);
+      }
+      .rang-card.rs .xp-label-val {
+        color: var(--rs);
+      }
+      .rang-card.rsup .xp-label-val {
+        color: var(--rsup);
+      }
+      .xp-track {
+        height: 6px;
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 0;
+        overflow: hidden;
+      }
+      .xp-bar {
+        height: 100%;
+        border-radius: 0;
+        position: relative;
+        animation: fillBar 1.4s ease forwards;
+      }
+      @keyframes fillBar {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--w);
+        }
+      }
+      .rang-card.rc .xp-bar {
+        background: var(--rc);
+        --w: 100%;
+      }
+      .rang-card.rb .xp-bar {
+        background: var(--rb);
+        --w: 100%;
+      }
+      .rang-card.ra .xp-bar {
+        background: var(--ra);
+        --w: 100%;
+      }
+      .rang-card.rs .xp-bar {
+        background: var(--rs);
+        --w: 100%;
+      }
+      .rang-card.rsup .xp-bar {
+        background: var(--rsup);
+        --w: 100%;
+      }
+
+      .img-deco {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center 40%;
+        filter: brightness(0.45) saturate(0.85);
+        display: block;
+        border: 1px solid var(--sep2);
+        margin: 28px 0;
+      }
+
+      .xp-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 14px;
+      }
+      .xp-item {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 10px;
+        padding: 10px 14px;
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        font-size: 0.84rem;
+        line-height: 1.65;
+        color: var(--texte);
+        transition: background 0.2s;
+      }
+      .xp-item:hover {
+        background: rgba(201, 168, 76, 0.04);
+      }
+      .xp-arrow {
+        color: var(--or);
+        opacity: 0.6;
+        padding-top: 2px;
+        font-size: 0.8rem;
+      }
+      .xp-item em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .rep-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 16px;
+      }
+      .rep-card {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-left: 2px solid;
+      }
+      .rep-card.rc2 {
+        border-left-color: var(--rc);
+      }
+      .rep-card.rb2 {
+        border-left-color: var(--rb);
+      }
+      .rep-card.ra2 {
+        border-left-color: var(--ra);
+      }
+      .rep-card.rs2 {
+        border-left-color: var(--rs);
+      }
+      .rep-badge-col {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 10px;
+        border-right: 1px solid var(--sep2);
+      }
+      .rep-badge2 {
+        font-family: "Cinzel", serif;
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        font-weight: 600;
+      }
+      .rep-card.rc2 .rep-badge2 {
+        color: var(--rc);
+      }
+      .rep-card.rb2 .rep-badge2 {
+        color: var(--rb);
+      }
+      .rep-card.ra2 .rep-badge2 {
+        color: var(--ra);
+      }
+      .rep-card.rs2 .rep-badge2 {
+        color: var(--rs);
+      }
+      .rep-body {
+        padding: 12px 16px;
+      }
+      .rep-title {
+        font-family: "Cinzel", serif;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        margin-bottom: 4px;
+      }
+      .rep-card.rc2 .rep-title {
+        color: var(--rc);
+      }
+      .rep-card.rb2 .rep-title {
+        color: var(--rb);
+      }
+      .rep-card.ra2 .rep-title {
+        color: var(--ra);
+      }
+      .rep-card.rs2 .rep-title {
+        color: var(--rs);
+      }
+      .rep-desc {
+        font-size: 0.82rem;
+        line-height: 1.65;
+        color: var(--texte);
+      }
+      .rep-desc em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .fin {
+        text-align: center;
+        padding: 32px 0 0;
+        font-family: "Noto Serif JP", serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: rgba(201, 168, 76, 0.18);
+        letter-spacing: 0.3em;
+      }
+      @media (max-width: 600px) {
+        .hero {
+          height: 300px;
+        }
+        .hero-kanji {
+          font-size: 2rem;
+        }
+        .rep-card {
+          grid-template-columns: 60px 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-vignette"></div>
+      <div class="hero-content">
+        <span class="hero-kanji">階位と名声</span>
+        <span class="hero-title">Rangs, Réputation & Progression</span>
+        <span class="hero-sub">Système de progression des personnages</span>
+      </div>
+    </div>
+    <div class="ornement">
+      <div class="ornement-line"></div>
+      <div class="ornement-sym">&#x2726; XP &#x2726;</div>
+      <div class="ornement-line"></div>
+    </div>
+    <div class="main">
+      <div class="section">
+        <div class="section-title">Rangs de combat</div>
+        <div class="intro-box">
+          <p>
+            En raison de la guerre constante qui frappe les nombreux territoires, le rang de base est le
+            <em>rang C</em>
+            pour tous les personnages. Vous pouvez cependant faire une demande pour commencer au
+            <em>rang B</em>
+            si vous le souhaitez.
+          </p>
+        </div>
+
+        <div class="rang-grid">
+          <div class="rang-card rc">
+            <div class="rang-header">
+              <span class="rang-badge">Rang C</span>
+              <span class="rang-title">Le shinobi lambda</span>
+            </div>
+            <div class="rang-body">
+              <p class="rang-desc">Le niveau d'un bon nombre de personnages, c'est le niveau moyen. Vous jouez d'emblée des héros, donc des personnages au-dessus de la norme, mais le rang C est celui par lequel vous commencerez dans la grande majorité des cas.</p>
+              <div class="xp-wrap">
+                <div class="xp-label">
+                  <span class="xp-label-text">Progression</span>
+                  <span class="xp-label-val">150 XP requis</span>
+                </div>
+                <div class="xp-track"><div class="xp-bar"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rang-card rb">
+            <div class="rang-header">
+              <span class="rang-badge">Rang B</span>
+              <span class="rang-title">Shinobi avancé</span>
+            </div>
+            <div class="rang-body">
+              <p class="rang-desc">
+                Vous êtes assez doué pour vous aventurer hors de votre territoire avec un risque de mort réduit. Vous êtes une véritable arme vivante : tuer une trentaine d'individus en quelques mouvements ? Facile.
+                <em>Ce rang fait de vous un être surnaturel pour le commun des mortels.</em>
+              </p>
+              <div class="xp-wrap">
+                <div class="xp-label">
+                  <span class="xp-label-text">Progression</span>
+                  <span class="xp-label-val">250 XP requis</span>
+                </div>
+                <div class="xp-track"><div class="xp-bar"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rang-card ra">
+            <div class="rang-header">
+              <span class="rang-badge">Rang A</span>
+              <span class="rang-title">Véritable légende</span>
+            </div>
+            <div class="rang-body">
+              <p class="rang-desc">
+                Ce niveau est sérieux. C'est celui qu'on trouve généralement chez les chefs de clan, les shinobi les plus puissants de leur groupe, capables à eux seuls de transformer entièrement un paysage via leurs techniques.
+                <em>Ces individus sont considérés comme de véritables monstres.</em>
+              </p>
+              <div class="xp-wrap">
+                <div class="xp-label">
+                  <span class="xp-label-text">Progression</span>
+                  <span class="xp-label-val">500 XP requis</span>
+                </div>
+                <div class="xp-track"><div class="xp-bar"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rang-card rs">
+            <div class="rang-header">
+              <span class="rang-badge">Rang S</span>
+              <span class="rang-title">Les plus puissants n'ayant jamais existé</span>
+            </div>
+            <div class="rang-body">
+              <p class="rang-desc">Considérez les shinobi ayant atteint ce rang comme les plus puissants qui aient jamais existé. C'est le niveau qu'on attribue aux figures légendaires.</p>
+              <div class="xp-wrap">
+                <div class="xp-label">
+                  <span class="xp-label-text">Progression</span>
+                  <span class="xp-label-val">Max</span>
+                </div>
+                <div class="xp-track"><div class="xp-bar"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rang-card rsup">
+            <div class="rang-header">
+              <span class="rang-badge">Rang Supérieur</span>
+              <span class="rang-title">Au-delà des limites humaines</span>
+            </div>
+            <div class="rang-body">
+              <p class="rang-desc">Niveau uniquement atteignable par certains PNJ, comme les Bijuu. Inaccessible aux joueurs.</p>
+              <div class="xp-wrap">
+                <div class="xp-label">
+                  <span class="xp-label-text">Statut</span>
+                  <span class="xp-label-val">PNJ uniquement</span>
+                </div>
+                <div class="xp-track"><div class="xp-bar" style="--w: 100%; opacity: 0.4"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img src="https://dailyanimeart.com/wp-content/uploads/2015/12/sasuke-trains.jpg" class="img-deco" alt="Entraînement shinobi" />
+
+      <div class="section">
+        <div class="section-title">Gagner de l'XP</div>
+        <p class="prose">Pour progresser en rang, vous aurez une barre d'XP à remplir afin d'accéder au palier supérieur. Poster dans les catégories RP rapporte de l'XP, tout comme participer aux missions. Combattre un adversaire, s'entraîner, ou participer à des actions importantes peut également rapporter des points.</p>
+        <p class="prose" style="margin-top: 10px">Voici une liste d'événements qui peuvent rapporter de l'XP supplémentaire :</p>
+        <div class="xp-list" style="margin-top: 14px">
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>
+              Participer à un
+              <em>entraînement</em>
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>
+              <em>Combat avec risque</em>
+              (danger réel, adversaire de niveau équivalent ou supérieur)
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>
+              <em>Actions politiques</em>
+              ayant un impact sur le monde du forum
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>
+              <em>Actions entraînant la progression du clan</em>
+              ou de l'organisation
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>
+              <em>Actions faisant avancer la trame personnelle</em>
+              de votre personnage
+            </div>
+          </div>
+          <div class="xp-item">
+            <div class="xp-arrow">&#x2023;</div>
+            <div>D'autres actions que les récompenseurs peuvent faire valider. Si vous estimez qu'un de vos RP mérite un bonus d'XP, postez-le dans la catégorie récompense de votre personnage : un récompenseur viendra vérifier et ajouter le bonus.</div>
+          </div>
+          <p class="prose">Votre XP se réinstialise à chaque passage de rang.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Réputation</div>
+        <p class="prose">
+          En plus de votre rang de personnage, vous aurez également un
+          <em>rang de réputation</em>
+          qui évoluera en fonction des exploits de votre personnage. Contrairement au rang personnel, ce niveau évolue en fonction de vos actions concrètes dans le monde. Nous suivrons vos exploits avec attention pour faire évoluer ces rangs.
+        </p>
+
+        <div class="rep-grid" style="margin-top: 18px">
+          <div class="rep-card rc2">
+            <div class="rep-badge-col"><span class="rep-badge2">C</span></div>
+            <div class="rep-body">
+              <div class="rep-title">Inconnu au bataillon</div>
+              <p class="rep-desc">Votre personnage n'a pas encore marqué les esprits. Personne ne vous connaît vraiment.</p>
+            </div>
+          </div>
+          <div class="rep-card rb2">
+            <div class="rep-badge-col"><span class="rep-badge2">B</span></div>
+            <div class="rep-body">
+              <div class="rep-title">Shinobi dont le nom fait écho</div>
+              <p class="rep-desc">Quelques exploits notables circulent à votre sujet. Certains connaissent votre nom.</p>
+            </div>
+          </div>
+          <div class="rep-card ra2">
+            <div class="rep-badge-col"><span class="rep-badge2">A</span></div>
+            <div class="rep-body">
+              <div class="rep-title">Acquisition d'un surnom</div>
+              <p class="rep-desc">
+                Votre nom inspire la crainte ou le respect.
+                <em>L'évocation de votre surnom peut faire trembler des armées entières.</em>
+              </p>
+            </div>
+          </div>
+          <div class="rep-card rs2">
+            <div class="rep-badge-col"><span class="rep-badge2">S</span></div>
+            <div class="rep-body">
+              <div class="rep-title">Réputation légendaire</div>
+              <p class="rep-desc">
+                <em>On parlera de vous dans les siècles à venir.</em>
+                Bénédiction ou fléau, votre légende traverse les générations.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fin">階位 &middot; 名声 &middot; 進歩</div>
+    <div style="height: 48px"></div>
+  </body>
+</html>

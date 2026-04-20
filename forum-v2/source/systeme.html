@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Système de Jeu — Sengoku no Jidai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0d0a06;
+        font-family: "IM Fell English", Georgia, serif;
+        color: #f0e6c8;
+      }
+
+      #systeme-page {
+        width: 100%;
+        padding-bottom: 60px;
+      }
+
+      /* HERO */
+      .s-hero {
+        position: relative;
+        width: 100%;
+        min-height: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 60px 20px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-bottom: 2px solid rgba(200, 169, 81, 0.3);
+      }
+
+      .s-hero-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 20%;
+        filter: brightness(0.3) saturate(0.6) sepia(0.3);
+        z-index: 0;
+      }
+
+      .s-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, #0d0a06 0%, transparent 20%, transparent 75%, #0d0a06 100%), linear-gradient(90deg, #0d0a06 0%, transparent 15%, transparent 85%, #0d0a06 100%);
+        z-index: 1;
+      }
+
+      .s-hero-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(200, 169, 81, 0.03) 40px, rgba(200, 169, 81, 0.03) 41px);
+        z-index: 1;
+      }
+
+      .s-hero-content {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .s-hero-deco {
+        font-family: "Cinzel", serif;
+        font-size: 16px;
+        letter-spacing: 6px;
+        color: #c8a951;
+        text-transform: uppercase;
+        margin-bottom: 14px;
+        opacity: 0.8;
+      }
+
+      .s-hero-titre {
+        font-family: "Cinzel", serif;
+        font-size: 51px;
+        font-weight: 700;
+        color: #f0e6c8;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        margin: 0 0 10px 0;
+        text-shadow:
+          0 0 40px rgba(200, 169, 81, 0.4),
+          0 2px 12px rgba(0, 0, 0, 1);
+        animation: titre-appear 2.5s ease forwards;
+      }
+
+      .s-hero-sous {
+        font-family: "IM Fell English", Georgia, serif;
+        font-size: 18px;
+        color: #c9a96e;
+        letter-spacing: 3px;
+        font-style: italic;
+      }
+
+      @keyframes titre-appear {
+        from {
+          opacity: 0;
+          letter-spacing: 18px;
+        }
+        to {
+          opacity: 1;
+          letter-spacing: 6px;
+        }
+      }
+
+      /* BODY */
+      .s-body {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .s-sep {
+        width: 220px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #c8a951, transparent);
+        margin: 40px auto;
+      }
+
+      .s-sep-sm {
+        width: 120px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(200, 169, 81, 0.4), transparent);
+        margin: 16px auto 24px;
+      }
+
+      .s-section-titre {
+        font-family: "Cinzel", serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: #c8a951;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        text-align: center;
+      }
+
+      .s-section-kanji {
+        font-size: 18px;
+        color: #c9a96e;
+        letter-spacing: 3px;
+        font-style: italic;
+        opacity: 0.7;
+        text-align: center;
+        margin-bottom: 28px;
+      }
+
+      .s-texte {
+        font-size: 17px;
+        line-height: 2;
+        color: #c9a96e;
+        font-style: italic;
+        text-align: justify;
+      }
+
+      .s-texte em {
+        color: #f0e6c8;
+        font-style: normal;
+      }
+
+      /* RANGS */
+      .s-rangs {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      .s-rang-card {
+        background: rgba(200, 169, 81, 0.05);
+        border: 1px solid rgba(200, 169, 81, 0.2);
+        padding: 14px 10px;
+        text-align: center;
+      }
+
+      .s-rang-nom {
+        font-family: "Cinzel", serif;
+        font-size: 25px;
+        color: #c8a951;
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .s-rang-detail {
+        font-size: 17px;
+        color: #c9a96e;
+        font-style: italic;
+        line-height: 1.7;
+      }
+
+      .s-rang-detail em {
+        color: #f0e6c8;
+        font-style: normal;
+      }
+
+      /* LAYOUT AVEC IMAGE DÉCORATIVE */
+      .s-layout-img {
+        display: grid;
+        grid-template-columns: 1fr 240px;
+        gap: 30px;
+        align-items: start;
+      }
+
+      .s-deco-img-wrapper {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border: 1px solid rgba(200, 169, 81, 0.2);
+        top: 0;
+      }
+
+      .s-deco-img {
+        width: 100%;
+        display: block;
+        filter: brightness(0.55) saturate(0.7) sepia(0.2);
+        -webkit-mask-image: linear-gradient(180deg, black 0%, black 70%, transparent 100%);
+        mask-image: linear-gradient(180deg, black 0%, black 70%, transparent 100%);
+      }
+
+      /* ITEMS DOMAINES / CAPACITÉS */
+      .s-item-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .s-item {
+        background: rgba(200, 169, 81, 0.03);
+        border: 1px solid rgba(200, 169, 81, 0.1);
+        border-left: 3px solid rgba(200, 169, 81, 0.35);
+        padding: 14px 16px;
+        margin-bottom: 10px;
+      }
+
+      .s-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .s-item-nom {
+        font-family: "Cinzel", serif;
+        font-size: 17px;
+        letter-spacing: 3px;
+        color: #c8a951;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .s-item-dot {
+        width: 5px;
+        height: 5px;
+        background: #c8a951;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .s-item-desc {
+        font-size: 16px;
+        color: #c9a96e;
+        font-style: italic;
+        line-height: 1.8;
+      }
+
+      .s-item-desc em {
+        color: #f0e6c8;
+        font-style: normal;
+      }
+
+      /* CRÉDIT */
+      .s-credit {
+        background: rgba(200, 169, 81, 0.04);
+        border: 1px solid rgba(200, 169, 81, 0.15);
+        padding: 12px 20px;
+        text-align: center;
+        font-size: 18px;
+        color: #c9a96e;
+        font-style: italic;
+        margin-bottom: 0;
+      }
+
+      .s-credit em {
+        color: #f0e6c8;
+        font-style: normal;
+      }
+
+      .s-deco-bottom {
+        color: #c8a951;
+        font-size: 16px;
+        letter-spacing: 8px;
+        opacity: 0.5;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      @media (max-width: 700px) {
+        .s-hero-titre {
+          font-size: 35px;
+        }
+        .s-rangs {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .s-layout-img {
+          grid-template-columns: 1fr;
+        }
+        .s-deco-img-wrapper {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="systeme-page">
+      <!-- HERO -->
+      <div class="s-hero">
+        <img class="s-hero-img" src="https://i.ytimg.com/vi/xnSFiUYkhGY/maxresdefault.jpg" alt="Système de jeu" />
+        <div class="s-hero-overlay"></div>
+        <div class="s-hero-lines"></div>
+        <div class="s-hero-content">
+          <div class="s-hero-deco">— Sengoku no Jidai · Règles du monde —</div>
+          <h1 class="s-hero-titre">Système de Jeu</h1>
+          <p class="s-hero-sous">忍術 · L'art du shinobi</p>
+        </div>
+      </div>
+
+      <div class="s-body">
+        <div class="s-sep"></div>
+
+        <!-- INTRO -->
+        <div class="s-section-titre">Introduction</div>
+        <div class="s-section-kanji">序文 · Le chemin du ninja</div>
+
+        <p class="s-texte">
+          Chaque shinobi est unique dans sa manière de combattre. Ce système, repris de
+          <em>Dawn of Ninja</em>
+          (crédité), va vous permettre de construire un personnage qui vous plaît et de vous amuser avec, mais également de pouvoir combattre selon vos envies via diverses techniques issues de vos
+          <em>Domaines</em>
+          (vos aptitudes au combat) et de vos
+          <em>Capacités</em>
+          (tous les talents liés à votre génétique, un savoir secret, des capacités innées...). Tout cela sera à renseigner sur votre fiche technique qui sera ensuite validée.
+        </p>
+
+        <div class="s-sep"></div>
+
+        <!-- RANGS -->
+        <div class="s-section-titre">Les Rangs</div>
+        <div class="s-section-kanji">階級 · La progression du ninja</div>
+
+        <div class="s-rangs">
+          <div class="s-rang-card">
+            <span class="s-rang-nom">D</span>
+            <span class="s-rang-detail">
+              <em>1 domaine</em>
+              <br />
+              1 capacité
+            </span>
+          </div>
+          <div class="s-rang-card">
+            <span class="s-rang-nom">C</span>
+            <span class="s-rang-detail">
+              <em>1 domaine</em>
+              <br />
+              1 capacité
+              <br />
+              +1 au choix
+            </span>
+          </div>
+          <div class="s-rang-card">
+            <span class="s-rang-nom">B</span>
+            <span class="s-rang-detail">
+              <em>1 domaine</em>
+              <br />
+              1 capacité
+              <br />
+              +2 au choix
+            </span>
+          </div>
+          <div class="s-rang-card">
+            <span class="s-rang-nom">A</span>
+            <span class="s-rang-detail">
+              <em>1 domaine</em>
+              <br />
+              1 capacité
+              <br />
+              +3 au choix
+            </span>
+          </div>
+          <div class="s-rang-card">
+            <span class="s-rang-nom">S</span>
+            <span class="s-rang-detail">
+              <em>1 domaine</em>
+              <br />
+              1 capacité
+              <br />
+              +4 au choix
+            </span>
+          </div>
+        </div>
+
+        <div class="s-sep"></div>
+
+        <!-- DOMAINES -->
+        <div class="s-layout-img">
+          <div>
+            <div class="s-section-titre">Les Domaines</div>
+            <div class="s-section-kanji">領域 · Les aptitudes au combat</div>
+
+            <ul class="s-item-list">
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Ninpo
+                </div>
+                <div class="s-item-desc">Toutes les techniques de ninjutsu n'employant aucune affinité, Kekkei Genkai ou spécificité. Accessibles à tous, elles demandent uniquement une bonne maîtrise du chakra. Il n'est pas obligatoire de posséder ce domaine pour utiliser les techniques de rang E.</div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Taijutsu
+                </div>
+                <div class="s-item-desc">Les techniques au corps à corps, l'art du combat à mains nues. Vous pouvez apprendre toutes les techniques de rang D de ce domaine sans le posséder.</div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Ninjutsu Affinitaire
+                </div>
+                <div class="s-item-desc">
+                  Chaque être vivant dispose d'une nature propre à son chakra parmi cinq :
+                  <em>Suiton, Katon, Futon, Raiton, Doton</em>
+                  . Vous pouvez apprendre les techniques de rang D de votre affinité principale sans ce domaine, mais il est nécessaire pour les rangs supérieurs. Peut être sélectionné plusieurs fois, mais ne permet pas de fusionner les éléments.
+                </div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Fusion Affinitaire
+                </div>
+                <div class="s-item-desc">Permet de combiner deux affinités élémentaires pour accéder à une troisième, plus puissante.</div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Genjutsu
+                </div>
+                <div class="s-item-desc">Ce domaine permet de réaliser des techniques illusoires destinées à tromper les sens de vos adversaires. Les techniques de rang D sont accessibles sans le posséder.</div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Bukijutsu
+                </div>
+                <div class="s-item-desc">Regroupe toutes les techniques liées à des armes, incluant le shurikenjutsu. Vous êtes considéré comme talentueux pour tout type d'arme, mais libre de vous spécialiser. Les techniques de rang D sont accessibles sans ce domaine.</div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Fuinjutsu
+                </div>
+                <div class="s-item-desc">
+                  L'art du scellement, un art complexe. Permet de réaliser des techniques de sceaux aux effets variés : emprisonner, contraindre un adversaire, sceller une personne, du chakra ou un objet.
+                  <em>Domaine récent, vous en serez les pionniers.</em>
+                </div>
+              </li>
+              <li class="s-item">
+                <div class="s-item-nom">
+                  <div class="s-item-dot"></div>
+                  Iryojutsu
+                </div>
+                <div class="s-item-desc">
+                  Le ninjutsu médical, l'art des soins et des connaissances biologiques. Permet de soigner vos alliés ou vous-même.
+                  <em>Domaine récent et très complexe.</em>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="s-deco-img-wrapper">
+            <img class="s-deco-img" src="https://zupimages.net/up/26/15/mbql.png" alt="Décoration" />
+          </div>
+        </div>
+
+        <div class="s-sep"></div>
+
+        <!-- CAPACITÉS -->
+        <div class="s-section-titre">Les Capacités</div>
+        <div class="s-section-kanji">能力 · Les talents innés</div>
+
+        <p class="s-texte" style="margin-bottom: 28px">Les capacités sont souvent innées à votre personnage (Kekkei Genkai, corps spéciaux) ou liées à un apprentissage (kuchiyose, hidden de clan...). Elles permettent d'accéder à un autre éventail de techniques ou constituent des bonus passifs.</p>
+
+        <ul class="s-item-list">
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Hidden Jutsu
+            </div>
+            <div class="s-item-desc">
+              Techniques secrètes, permet d'apprendre les secrets d'un clan. Un Hidden n'est pas héréditaire, il s'agit d'un savoir ancestral qui se transmet et peut donc être
+              <em>volé</em>
+              . Le vol de Hidden ne peut se faire dès la présentation.
+            </div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Kekkei Genkai
+            </div>
+            <div class="s-item-desc">Accès à des gènes spéciaux offrant des capacités uniques partagées avec certains membres de votre clan. Peut prendre la forme d'un dojutsu ou de l'accès à des affinités spéciales (Hyoton, Yoton, Ranton...) de manière innée.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Furtivité
+            </div>
+            <div class="s-item-desc">Permet tout ce qui est discrétion et approche silencieuse.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Sensoriel
+            </div>
+            <div class="s-item-desc">Permet d'accéder au mode sensoriel, un talent rare qui permet de détecter et sentir le chakra, même passivement à partir d'un certain rang de maîtrise.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Kuchiyose
+            </div>
+            <div class="s-item-desc">
+              L'art des invocations.
+              <em>Peut être prise plusieurs fois pour accéder à plusieurs pactes.</em>
+            </div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Mudra à une main
+            </div>
+            <div class="s-item-desc">Permet de réaliser les mudra des techniques de son rang à une seule main.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Techniques sans mudra
+            </div>
+            <div class="s-item-desc">À force de pratiquer ses techniques classiques, vous pouvez en sauter les mudra. Ne fonctionne que pour un domaine affinitaire ou le Ninpo, les techniques sans mudra ne peuvent excéder le rang B et ne peuvent pas voir leur coût réduit.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Vitesse Supersonique
+            </div>
+            <div class="s-item-desc">Permet deux fois par combat soit d'éviter une attaque de portée moyenne inférieure ou égale à son rang, soit d'utiliser une technique de taijutsu, bukijutsu ou nintaijutsu supplémentaire. Jamais deux fois le même tour.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Mudra Accéléré
+            </div>
+            <div class="s-item-desc">Permet de réaliser des mudra si rapidement qu'ils ne peuvent être interrompus au corps à corps. Utilisable deux fois par combat. Une technique envoyée ainsi ne peut pas voir son coût en chakra réduit. Les techniques trop complexes (Fuinjutsu, Iryojutsu, rang S) ne peuvent pas être accélérées.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Réflexes Surhumains
+            </div>
+            <div class="s-item-desc">Vous pouvez vous montrer très difficile à surprendre, évitant tout malus dû à la surprise. Permet d'esquiver une technique de rang inférieur ou égal à votre rang de vitesse, intelligence ou rang personnel n'ayant pas de champ d'action supérieur à moyen. Utilisable deux fois par combat, jamais le même tour.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Endurance Surhumaine
+            </div>
+            <div class="s-item-desc">Votre corps est très solide. Vous pouvez ignorer les dégâts ou les effets secondaires d'une technique de rang inférieur ou égal au vôtre, ou ignorer les effets d'une affliction (immobilisation, saignements, paralysie, poison). Utilisable deux fois par combat, jamais deux fois dans le même tour.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Volonté Supérieure
+            </div>
+            <div class="s-item-desc">Votre volonté de fer est telle que vous ne craignez ni la peur, ni la torture, et n'abandonnez jamais un combat malgré les dégâts. Vous pouvez annuler les effets des techniques ayant un effet psychologique deux fois par combat. Passivement, votre personnage est un véritable roc inébranlable.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Palais Mental
+            </div>
+            <div class="s-item-desc">Vous faites preuve d'une force mentale impressionnante. Vous pouvez repousser une technique à effets mentaux ou défaire un genjutsu de rang inférieur ou égal à votre rang ou celui de votre intelligence. Utilisable deux fois par combat, jamais deux fois le même tour.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Sens Développé
+            </div>
+            <div class="s-item-desc">
+              Permet d'obtenir un sens plus développé que la norme (ouïe, odorat, vue...) procurant des avantages précis.
+              <em>Sélectionnable plusieurs fois.</em>
+            </div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Force Surhumaine
+            </div>
+            <div class="s-item-desc">Lors d'un assaut au corps à corps, vous pouvez considérer vos coups de poing basiques comme une technique de taijutsu égale à votre rang ou celui de votre Force. Permet également de vous libérer d'une technique d'entrave. Passivement, vous portez des objets lourds sans être gêné. Utilisable deux fois par combat, jamais dans le même tour.</div>
+          </li>
+          <li class="s-item">
+            <div class="s-item-nom">
+              <div class="s-item-dot"></div>
+              Bonus de Caractéristique
+            </div>
+            <div class="s-item-desc">
+              Augmente une caractéristique d'un rang. La caractéristique augmentée vous rend légèrement supérieur dans les situations concernées.
+              <em>Sélectionnable autant de fois que souhaité, sur la même ou différentes caractéristiques.</em>
+            </div>
+          </li>
+        </ul>
+
+        <div class="s-sep"></div>
+
+        <div class="s-credit">
+          Système repris et adapté de
+          <em>Dawn of Ninja</em>
+          — toute la reconnaissance leur est accordée.
+        </div>
+
+        <div class="s-deco-bottom">— ✦ —</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Missions & Conquêtes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --or: #c9a84c;
+        --or-pale: #e8d090;
+        --fond: #09090b;
+        --fond2: #0f0f13;
+        --texte: #e4ddd0;
+        --texte-dim: #857a68;
+        --sep: rgba(201, 168, 76, 0.22);
+        --sep2: rgba(201, 168, 76, 0.1);
+        --rd: #6b9fd4;
+        --rc: #74c69d;
+        --rb: #f0c060;
+        --ra: #e07070;
+        --rs: #b39ddb;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background: var(--fond);
+        color: var(--texte);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      .hero {
+        position: relative;
+        width: 100%;
+        height: 420px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url("https://i.pinimg.com/736x/28/d0/3d/28d03db0156a379d02a51d2785f09358.jpg") center 30% / cover no-repeat;
+        filter: brightness(0.25) saturate(0.9);
+        transform: scale(1.04);
+      }
+      .hero-vignette {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, var(--fond) 0%, transparent 20%, transparent 60%, var(--fond) 100%), linear-gradient(to right, var(--fond) 0%, transparent 12%, transparent 88%, var(--fond) 100%);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        padding: 0 24px;
+      }
+      .hero-kanji {
+        font-family: "Noto Serif JP", serif;
+        font-size: 2.8rem;
+        font-weight: 300;
+        color: var(--or-pale);
+        letter-spacing: 0.2em;
+        display: block;
+        line-height: 1;
+      }
+      .hero-title {
+        font-family: "Cinzel", serif;
+        font-size: 1rem;
+        letter-spacing: 0.42em;
+        color: var(--or);
+        text-transform: uppercase;
+        margin-top: 10px;
+        display: block;
+      }
+      .hero-sub {
+        font-size: 0.75rem;
+        color: var(--texte-dim);
+        letter-spacing: 0.15em;
+        font-style: italic;
+        margin-top: 6px;
+      }
+      .ornement {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        padding: 26px 24px 18px;
+      }
+      .ornement-line {
+        flex: 1;
+        height: 1px;
+        max-width: 200px;
+        background: linear-gradient(to right, transparent, var(--sep), var(--or), var(--sep), transparent);
+      }
+      .ornement-sym {
+        font-family: "Cinzel", serif;
+        font-size: 0.75rem;
+        color: var(--or);
+        letter-spacing: 0.3em;
+        opacity: 0.75;
+      }
+      .main {
+        max-width: 840px;
+        margin: 0 auto;
+        padding: 0 24px 60px;
+      }
+      .section {
+        margin-bottom: 50px;
+      }
+      .section-title {
+        font-family: "Cinzel", serif;
+        font-size: 0.65rem;
+        letter-spacing: 0.38em;
+        text-transform: uppercase;
+        color: var(--or);
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, var(--sep), transparent);
+      }
+      .prose {
+        font-size: 0.93rem;
+        color: var(--texte);
+        line-height: 1.85;
+      }
+      .prose + .prose {
+        margin-top: 13px;
+      }
+      .prose em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      /* MISSIONS */
+      .missions-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin-top: 16px;
+      }
+      .mission-card {
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-left: 3px solid;
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        overflow: hidden;
+      }
+      .mission-card.rd {
+        border-left-color: var(--rd);
+      }
+      .mission-card.rc {
+        border-left-color: var(--rc);
+      }
+      .mission-card.rb {
+        border-left-color: var(--rb);
+      }
+      .mission-card.ra {
+        border-left-color: var(--ra);
+      }
+      .mission-card.rs {
+        border-left-color: var(--rs);
+      }
+      .mission-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 10px;
+        border-right: 1px solid var(--sep2);
+        gap: 8px;
+      }
+      .mission-rang {
+        font-family: "Cinzel", serif;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 1;
+      }
+      .mission-card.rd .mission-rang {
+        color: var(--rd);
+      }
+      .mission-card.rc .mission-rang {
+        color: var(--rc);
+      }
+      .mission-card.rb .mission-rang {
+        color: var(--rb);
+      }
+      .mission-card.ra .mission-rang {
+        color: var(--ra);
+      }
+      .mission-card.rs .mission-rang {
+        color: var(--rs);
+      }
+      .mission-label {
+        font-family: "Cinzel", serif;
+        font-size: 0.44rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--texte-dim);
+      }
+      .mission-right {
+        padding: 14px 18px;
+      }
+      .mission-title {
+        font-family: "Cinzel", serif;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        margin-bottom: 6px;
+      }
+      .mission-card.rd .mission-title {
+        color: var(--rd);
+      }
+      .mission-card.rc .mission-title {
+        color: var(--rc);
+      }
+      .mission-card.rb .mission-title {
+        color: var(--rb);
+      }
+      .mission-card.ra .mission-title {
+        color: var(--ra);
+      }
+      .mission-card.rs .mission-title {
+        color: var(--rs);
+      }
+      .mission-desc {
+        font-size: 0.83rem;
+        line-height: 1.68;
+        color: var(--texte);
+        margin-bottom: 10px;
+      }
+      .mission-desc em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+      .mission-reward {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "Cinzel", serif;
+        font-size: 0.52rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--texte-dim);
+      }
+      .mission-reward-val {
+        padding: 2px 8px;
+        border: 1px solid;
+      }
+      .mission-card.rd .mission-reward-val {
+        color: var(--rd);
+        border-color: rgba(107, 159, 212, 0.35);
+      }
+      .mission-card.rc .mission-reward-val {
+        color: var(--rc);
+        border-color: rgba(116, 198, 157, 0.35);
+      }
+      .mission-card.rb .mission-reward-val {
+        color: var(--rb);
+        border-color: rgba(240, 192, 96, 0.35);
+      }
+      .mission-card.ra .mission-reward-val {
+        color: var(--ra);
+        border-color: rgba(224, 112, 112, 0.35);
+      }
+      .mission-card.rs .mission-reward-val {
+        color: var(--rs);
+        border-color: rgba(179, 157, 219, 0.35);
+      }
+
+      .img-deco {
+        width: 100%;
+        height: 210px;
+        object-fit: cover;
+        object-position: center 40%;
+        filter: brightness(0.45) saturate(0.85);
+        display: block;
+        border: 1px solid var(--sep2);
+        margin: 28px 0;
+      }
+
+      /* ECHEC */
+      .echec-box {
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-left: 1px solid var(--sep);
+        padding: 16px 20px;
+        margin-top: 16px;
+      }
+      .echec-box p {
+        font-size: 0.88rem;
+        line-height: 1.75;
+        color: var(--texte);
+      }
+      .echec-box em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      /* CONQUÊTES */
+      .conquete-intro {
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-top: 2px solid var(--or);
+        padding: 16px 20px;
+        margin-bottom: 16px;
+      }
+      .conquete-intro p {
+        font-size: 0.88rem;
+        line-height: 1.75;
+        color: var(--texte);
+      }
+      .conquete-intro em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+      .regles-list {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        margin-top: 14px;
+      }
+      .regle-item {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        gap: 12px;
+        padding: 13px 15px;
+        background: var(--fond2);
+        border: 1px solid var(--sep2);
+        border-left: 1px solid var(--sep);
+        font-size: 0.86rem;
+        line-height: 1.7;
+        color: var(--texte);
+        transition: background 0.2s;
+      }
+      .regle-item:hover {
+        background: rgba(201, 168, 76, 0.04);
+      }
+      .regle-num {
+        font-family: "Cinzel", serif;
+        font-size: 0.58rem;
+        color: var(--or);
+        opacity: 0.55;
+        padding-top: 3px;
+      }
+      .regle-item em {
+        color: var(--or-pale);
+        font-style: italic;
+      }
+
+      .cout-box {
+        border: 1px solid var(--sep);
+        background: rgba(201, 168, 76, 0.05);
+        padding: 14px 20px;
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+      }
+      .cout-label {
+        font-family: "Cinzel", serif;
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--texte-dim);
+        margin-right: 4px;
+      }
+      .cout-pill {
+        font-family: "Cinzel", serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        padding: 4px 12px;
+        border: 1px solid var(--sep);
+        color: var(--or);
+      }
+
+      .fin {
+        text-align: center;
+        padding: 32px 0 0;
+        font-family: "Noto Serif JP", serif;
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: rgba(201, 168, 76, 0.18);
+        letter-spacing: 0.3em;
+      }
+      @media (max-width: 600px) {
+        .hero {
+          height: 300px;
+        }
+        .hero-kanji {
+          font-size: 2rem;
+        }
+        .mission-card {
+          grid-template-columns: 70px 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-vignette"></div>
+      <div class="hero-content">
+        <span class="hero-kanji">任務と征服</span>
+        <span class="hero-title">Missions & Conquêtes</span>
+        <span class="hero-sub">Récompenses, dangers & règles d'engagement</span>
+      </div>
+    </div>
+    <div class="ornement">
+      <div class="ornement-line"></div>
+      <div class="ornement-sym">&#x2726; MISSIONS &#x2726;</div>
+      <div class="ornement-line"></div>
+    </div>
+    <div class="main">
+      <div class="section">
+        <div class="section-title">Rangs de mission</div>
+        <p class="prose">Les missions sont des RP spéciaux qui apportent des récompenses supérieures avec une difficulté croissante. Elles sont généralement proposées par les chefs de clan, les autorités locales et autres. Vous y aurez accès depuis vos clans, des comptoirs et autres. Vous pouvez également en proposer vous-même pour des conquêtes, des explorations, la traque d'un PNJ, que ce soit en solo ou avec animateur selon le rang.</p>
+
+        <div class="missions-grid" style="margin-top: 20px">
+          <div class="mission-card rd">
+            <div class="mission-left">
+              <span class="mission-rang">D</span>
+              <span class="mission-label">Solo</span>
+            </div>
+            <div class="mission-right">
+              <div class="mission-title">Missions simples</div>
+              <p class="mission-desc">Mission que vous pouvez effectuer en solo. Il s'agit de tâches assez simples du style retrouver le chat d'une grand-mère. Aucun danger sérieux.</p>
+              <div class="mission-reward">
+                <span>Récompense</span>
+                <span class="mission-reward-val">2 &ndash; 3 XP</span>
+                <span class="mission-reward-val">Quelques Ryo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-card rc">
+            <div class="mission-left">
+              <span class="mission-rang">C</span>
+              <span class="mission-label">Danger faible</span>
+            </div>
+            <div class="mission-right">
+              <div class="mission-title">Premières confrontations</div>
+              <p class="mission-desc">
+                Mission impliquant un minimum de combat contre des bandits ou des animaux sauvages. Pas très difficile, mais selon certaines conditions,
+                <em>la mort est possible</em>
+                .
+              </p>
+              <div class="mission-reward">
+                <span>Récompense</span>
+                <span class="mission-reward-val">3 &ndash; 5 XP</span>
+                <span class="mission-reward-val">Quelques Ryo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-card rb">
+            <div class="mission-left">
+              <span class="mission-rang">B</span>
+              <span class="mission-label">Danger sérieux</span>
+            </div>
+            <div class="mission-right">
+              <div class="mission-title">Shinobi & groupes ennemis</div>
+              <p class="mission-desc">
+                Mission impliquant des combats contre d'autres shinobi ou des groupes d'ennemis organisés.
+                <em>Le danger de mort est très présent.</em>
+                À partir de ce rang, toutes les missions se font avec un animateur. C'est également à partir d'ici que vous pouvez acquérir des points pour votre clan ou organisation.
+              </p>
+              <div class="mission-reward">
+                <span>Récompense</span>
+                <span class="mission-reward-val">5 &ndash; 10 XP</span>
+                <span class="mission-reward-val">Points de clan</span>
+                <span class="mission-reward-val">Plusieurs Ryo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-card ra">
+            <div class="mission-left">
+              <span class="mission-rang">A</span>
+              <span class="mission-label">Élite</span>
+            </div>
+            <div class="mission-right">
+              <div class="mission-title">Shinobis aguerris & armées</div>
+              <p class="mission-desc">
+                Mission impliquant plusieurs shinobis aguerris, voire des armées entières.
+                <em>Le danger de mort est certain.</em>
+                Seuls les shinobis les plus talentueux peuvent y prétendre.
+              </p>
+              <div class="mission-reward">
+                <span>Récompense</span>
+                <span class="mission-reward-val">10 &ndash; 15 XP</span>
+                <span class="mission-reward-val">Points de clan</span>
+                <span class="mission-reward-val">Beaucoup de Ryo</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mission-card rs">
+            <div class="mission-left">
+              <span class="mission-rang">S</span>
+              <span class="mission-label">Légendaire</span>
+            </div>
+            <div class="mission-right">
+              <div class="mission-title">Difficulté extrême</div>
+              <p class="mission-desc">
+                Ces missions peuvent s'étaler sur plusieurs semaines et impliquent
+                <em>un risque de mort très élevé</em>
+                . Seuls les shinobis les plus exceptionnels peuvent y participer.
+              </p>
+              <div class="mission-reward">
+                <span>Récompense</span>
+                <span class="mission-reward-val">15 &ndash; 20 XP</span>
+                <span class="mission-reward-val">Points de clan</span>
+                <span class="mission-reward-val">Beaucoup de Ryo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img src="https://i.pinimg.com/control1/736x/33/d3/33/33d333bd968bad4b298ec6a18811f5b0.jpg" class="img-deco" alt="Mission shinobi" />
+
+      <div class="section">
+        <div class="section-title">En cas d'échec</div>
+        <div class="echec-box">
+          <p>
+            Il est tout à fait possible d'échouer une mission. Cela peut résulter en une mission de rattrapage, une baisse d'influence, des blessures, voire la mort selon les cas. Les animateurs ne sont généralement
+            <em>pas là pour vous tuer ou vous faire échouer à tout prix</em>
+            , cependant certaines missions demandent une vraie stratégie et un groupe solide. Lorsque vous acceptez une mission difficile,
+            <em>vous acceptez de vous heurter à des obstacles à la hauteur.</em>
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Les Conquêtes</div>
+
+        <div class="conquete-intro">
+          <p>
+            Il s'agit d'un type de mission particulier : un enchaînement de missions et de quêtes visant à conquérir une région entière. Pour amorcer une conquête, il est obligatoire de remplir
+            <em>au moins 2 missions d'exploration</em>
+            fournissant les détails nécessaires. Ensuite, vous avez le champ libre dans votre approche : militaire, pacifique, ou autre. Vous êtes maître de votre stratégie.
+          </p>
+        </div>
+
+        <div class="regles-list">
+          <div class="regle-item">
+            <div class="regle-num">01</div>
+            <div>
+              Vous ne pouvez pas lancer une conquête seul, aussi grande que soit votre puissance. Un territoire est vaste et ses dangers également.
+              <em>Une conquête nécessite au moins trois joueurs</em>
+              , avec la possibilité d'être appuyé par un PNJ de votre clan.
+            </div>
+          </div>
+          <div class="regle-item">
+            <div class="regle-num">02</div>
+            <div>
+              Les conquêtes se déroulent en
+              <em>PVP</em>
+              . Si un clan joueur est présent dans la région ciblée, il peut entreprendre des missions contre vous, envahir vos RP, participer à la défense. La région peut également avoir des alliés qui s'insèrent dans le conflit.
+            </div>
+          </div>
+          <div class="regle-item">
+            <div class="regle-num">03</div>
+            <div>
+              Lancer une conquête a un coût en ressources. Il est possible de réduire ces coûts en amont via des
+              <em>missions d'exploration ou de déstabilisation</em>
+              de la région ciblée.
+            </div>
+          </div>
+          <div class="regle-item">
+            <div class="regle-num">04</div>
+            <div>
+              Être en phase de conquête
+              <em>vous empêche de construire ou finaliser un projet</em>
+              jusqu'à la fin de cette dernière. Les points dépensés pour ces projets sont figés pendant toute la durée.
+            </div>
+          </div>
+          <div class="regle-item">
+            <div class="regle-num">05</div>
+            <div>
+              Un personnage indépendant peut également se lancer dans des opérations de conquête,
+              <em>à condition d'avoir les partenaires nécessaires, suite à cela son territoire commencera avec un déficit de points identiques au coût nécessaire pour lancer la conquête. (Territoire instable)</em>
+              .
+            </div>
+          </div>
+        </div>
+
+        <div class="cout-box">
+          <span class="cout-label">Coût de lancement</span>
+          <span class="cout-pill">4 PM</span>
+          <span class="cout-pill">3 PP</span>
+          <span class="cout-pill">3 PE</span>
+        </div>
+      </div>
+    </div>
+    <div class="fin">任務 &middot; 征服 &middot; 栄光</div>
+    <div style="height: 48px"></div>
+  </body>
+</html>

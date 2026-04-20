@@ -3,14 +3,8 @@
   <head>
     <meta charset="{S_CONTENT_ENCODING}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-    />
-    <meta
-      http-equiv="content-type"
-      content="text/html; charset={S_CONTENT_ENCODING}"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
 
     <!-- BEGIN switch_canonical_url -->
     <link rel="canonical" href="{switch_canonical_url.CANONICAL_URL}" />
@@ -24,296 +18,36 @@
 
     <meta name="theme-color" content="{GG_THEME_COLOR}" />
 
-    <link
-      rel="search"
-      type="application/opensearchdescription+xml"
-      href="/improvedsearch.xml"
-      title="{SITENAME}"
-    />
-    <link
-      rel="search"
-      type="application/opensearchdescription+xml"
-      href="{URL_BOARD_DIRECTORY}/search/improvedsearch.xml"
-      title="{SEARCH_FORUMS}"
-    />
+    <link rel="search" type="application/opensearchdescription+xml" href="/improvedsearch.xml" title="{SITENAME}" />
+    <link rel="search" type="application/opensearchdescription+xml" href="{URL_BOARD_DIRECTORY}/search/improvedsearch.xml" title="{SEARCH_FORUMS}" />
 
     <script src="{JQUERY_PATH}" type="text/javascript"></script>
-    <!-- BEGIN switch_recent_jquery -->
-    <script
-      src="{JS_DIR}jquery1.9/jquery-migrate-1.4.1.js"
-      type="text/javascript"
-    ></script>
-    <script
-      src="{JQUERY_DIR}browser/v1.0/jquery.browser.min.js"
-      type="text/javascript"
-    ></script>
-    <script
-      src="{JQUERY_DIR}support/jquery.support.js"
-      type="text/javascript"
-    ></script>
-    <!-- END switch_recent_jquery -->
-
     <script src="{JS_DIR}{L_LANG}.js" type="text/javascript"></script>
 
-    <!-- BEGIN switch_fb_login -->
-    <script src="{switch_fb_login.JS_FB_LOGIN}" type="text/javascript"></script>
-    <!-- END switch_fb_login -->
-
-    <!-- BEGIN switch_ticker -->
-    <link
-      type="text/css"
-      rel="stylesheet"
-      href="{JS_DIR}jquery/ticker/ticker.css"
-    />
-    <script
-      src="{JS_DIR}jquery/ticker/ticker.js"
-      type="text/javascript"
-    ></script>
-    <!-- END switch_ticker -->
-
-    <!-- BEGIN switch_ticker -->
-    <script type="text/javascript">
-      //<![CDATA[
-      $(document).ready(function () {
-          Ticker.start({
-              height : {switch_ticker.HEIGHT},
-              spacing : {switch_ticker.SPACING},
-              speed : {switch_ticker.SPEED},
-              direction : '{switch_ticker.DIRECTION}',
-              pause : {switch_ticker.STOP_TIME},
-              max_height: {switch_ticker.HEIGHT},
-          });
-      });
-      //]]>
-    </script>
-    <!-- END switch_ticker -->
-    <script type="text/javascript">
-      $(document).scroll(function () {
-        var y = $(this).scrollTop();
-        if (y > 164) {
-          if ($(".btn-fixed").find(".btn-fixed-txt").length !== 0) {
-            $(".btn-fixed").addClass("btn-scrolled");
-          }
-        } else {
-          if ($(".btn-fixed").find(".btn-fixed-txt").length !== 0) {
-            $(".btn-fixed").removeClass("btn-scrolled");
-          }
-        }
-      });
-    </script>
-    <!-- BEGIN switch_report_popup -->
-    <script type="text/javascript">
-      //<![CDATA[
-      $(document).ready(function () {
-        report = window.open(
-          "{switch_report_popup.U_REPORT_POPUP}",
-          "_phpbbreport",
-          "HEIGHT={switch_report_popup.S_HEIGHT},resizable=yes,scrollbars=no,WIDTH={switch_report_popup.S_WIDTH}",
-        );
-        if (report != null) {
-          report.focus();
-        }
-      }); //]]>
-    </script>
-    <!-- END switch_report_popup -->
-    <!-- BEGIN switch_enable_pm_popup -->
-    <script type="text/javascript">
-      //<![CDATA[
-      $(document).ready(function () {
-        pm = window.open(
-          "{U_PRIVATEMSGS_POPUP}",
-          "_faprivmsg",
-          "HEIGHT=225,resizable=yes,WIDTH=400",
-        );
-        if (pm != null) {
-          pm.focus();
-        }
-      });
-      //]]>
-    </script>
-    <!-- END switch_enable_pm_popup -->
-    <!-- BEGIN switch_login_popup -->
-    <script type="text/javascript">
-      //<![CDATA[
-      var logInPopUpLeft,
-        logInPopUpTop,
-        logInPopUpWidth = { LOGIN_POPUP_WIDTH },
-        logInPopUpHeight = { LOGIN_POPUP_HEIGHT },
-        logInBackgroundResize = true,
-        logInBackgroundClass = false;
-
-      $(document).ready(function () {
-        $(window).resize(function () {
-          var windowWidth = document.documentElement.clientWidth;
-          var popupWidth = $("#login_popup").width();
-          var mypopup = $("#login_popup");
-
-          $("#login_popup").css({
-            left: windowWidth / 2 - popupWidth / 2,
-          });
-        });
-      });
-      //]]>
-    </script>
-    <!-- END switch_login_popup -->
-
     {RICH_SNIPPET_GOOGLE} {HOSTING_JS}
-
-    <!-- BEGIN google_analytics_code -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id={G_ANALYTICS_ID}"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "{G_ANALYTICS_ID}", {
-        anonymize_ip: true,
-        store_gac: false,
-        cookie_expires: 13 * 30 * 24 * 60 * 60,
-      });
-      <!-- BEGIN google_analytics_code_bis -->
-      gtag("config", "{G_ANALYTICS_ID_BIS}", {
-        anonymize_ip: true,
-        store_gac: false,
-        cookie_expires: 13 * 30 * 24 * 60 * 60,
-      });
-      <!-- END google_analytics_code_bis -->
-    </script>
-    <!-- END google_analytics_code -->
 
     <style>
       .forum-description img {
         max-width: calc(100% - 15px);
       }
     </style>
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@7/dist/ionicons/ionicons.js"
-    ></script>
   </head>
 
   <body id="top">
-    <!-- BEGIN switch_login_popup -->
-    <div
-      id="login_popup"
-      class="block-subtle"
-      style="z-index: 10001 !important"
-    >
-      <div class="headline">
-        {SITENAME}
-        <button title="{L_LOGIN_CLOSE}" id="login_popup_close">
-          <i class="material-symbols-outlined">close</i>
-        </button>
-      </div>
-      <div id="login_popup_content">
-        <div id="login_popup_message">{LOGIN_POPUP_MSG}</div>
-        <br />
-        <div id="login_popup_buttons">
-          <!-- BEGIN switch_quick_login -->
-          <div class="mt10">
-            <div class="social_btn">
-              <!-- BEGIN fb_quick_connect -->
-              <div class="fb-login-button"></div>
-              <!-- END fb_quick_connect -->
-              &nbsp;
-              <!-- BEGIN topicit_quick_connect -->
-              <div class="ti-connect"></div>
-              <!-- END topicit_quick_connect -->
-            </div>
-          </div>
-          <br />
-          <!-- END switch_quick_login -->
-          <form action="{S_LOGIN_ACTION}" method="get">
-            <input type="submit" value="{L_LOGIN}" class="btn btn-default" />
-            <input
-              type="button"
-              value="{L_REGISTER}"
-              onclick="parent.location = '{U_REGISTER}'"
-              class="btn btn-default"
-            />
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- END switch_login_popup -->
-
     {GREETING_POPUP}
 
-    <!-- BEGIN inactive_users_modal -->
-    <div
-      id="inactive_popup"
-      class="block-subtle"
-      style="z-index: 10000 !important"
-    >
-      <div class="headline">
-        {inactive_users_modal.L_MODAL_TITLE}
-        <button
-          title="{inactive_users_modal.L_CLOSE}"
-          id="inactive_popup_close"
-        >
-          <i class="material-symbols-outlined">close</i>
-        </button>
-      </div>
-      <div id="inactive_popup_message">{inactive_users_modal.L_MODAL_BODY}</div>
-      <br />
-      <div id="inactive_popup_buttons">
-        <button id="inactive_popup_url" class="button1">
-          {inactive_users_modal.L_MODAL_BUTTON}
-        </button>
-      </div>
-    </div>
-    <script type="text/javascript">
-      $("#inactive_popup #inactive_popup_close").on("mouseup", function () {
-        document.cookie =
-          "modal_require_activation_closed=1; max-age=86400*15; path=/;";
-        $("#inactive_popup").hide(50);
-      });
-      $("#inactive_popup #inactive_popup_url").on("mouseup", function () {
-        document.cookie =
-          "modal_require_activation_closed=1; max-age=86400*15; path=/;";
-        location.href = "{inactive_users_modal.U_MODAL}";
-      });
-    </script>
-    <!-- END inactive_users_modal -->
-
-    <!-- BEGIN switch_like_popup -->
-    <div id="like_popup" class="block-subtle" style="z-index: 10001 !important">
-      <div class="headline">
-        {SITENAME}
-        <button title="{L_LIKE_CLOSE}" id="like_popup_close">
-          <i class="material-symbols-outlined">close</i>
-        </button>
-      </div>
-      <div id="like_popup_message">{LIKE_POPUP_MSG}</div>
-      <br />
-      <div id="like_popup_buttons">
-        <form action="{S_LOGIN_ACTION}" method="get">
-          <input type="submit" value="{L_LOGIN}" class="btn btn-default" />
-          <input
-            type="button"
-            value="{L_REGISTER}"
-            onclick="parent.location = '{U_REGISTER}'"
-            class="btn btn-default"
-          />
-        </form>
-      </div>
-    </div>
-    <!-- END switch_like_popup -->
     <nav id="custom-navbar">
       <div class="navbar-inner">
         <button class="nav-burger" id="nav-burger-btn" aria-label="Menu">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/6499/6499731.png"
-            alt="burger menu"
-          />
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path d="M4 18L20 18" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M4 12L20 12" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+              <path d="M4 6L20 6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"></path>
+            </g>
+          </svg>
         </button>
 
         <div class="nav-center">
@@ -321,7 +55,7 @@
             <ion-icon name="home-outline"></ion-icon>
             Accueil
           </a>
-          <a class="nav-link" href="{U_SEARCH}">
+          <a class="nav-link" href="/search">
             <ion-icon name="search-outline"></ion-icon>
             Rechercher
           </a>
@@ -337,26 +71,19 @@
     <div class="nav-overlay" id="nav-overlay"></div>
 
     <nav class="nav-drawer" id="nav-drawer">
-      <button
-        class="nav-drawer-close"
-        id="nav-drawer-close"
-        aria-label="Fermer"
-      >
-        <ion-icon name="close-outline"></ion-icon>
+      <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+          <g id="SVGRepo_iconCarrier">
+            <path d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z" fill="#FFFFFF"></path>
+          </g>
+        </svg>
       </button>
       <div id="nav-drawer-user-block"></div>
-      <a class="nav-drawer-link" href="{U_INDEX}">
-        <ion-icon name="home-outline"></ion-icon>
-        Accueil
-      </a>
-      <a class="nav-drawer-link" href="{U_SEARCH}">
-        <ion-icon name="search-outline"></ion-icon>
-        Rechercher
-      </a>
-      <a class="nav-drawer-link" href="/memberlist">
-        <ion-icon name="people-outline"></ion-icon>
-        Membres
-      </a>
+      <a class="nav-drawer-link" href="{U_INDEX}">Accueil</a>
+      <a class="nav-drawer-link" href="/search">Rechercher</a>
+      <a class="nav-drawer-link" href="/memberlist">Membres</a>
       <div id="nav-drawer-auth-block"></div>
     </nav>
 
@@ -367,51 +94,13 @@
         var $drawerUser = $("#nav-drawer-user-block");
 
         if (_userdata.session_logged_in == 1) {
-          console.log(_userdata);
-
           var avatarSrc = _userdata.avatar_link;
           var username = _userdata.username;
-          var avatarHtml =
-            avatarSrc ?
-              '<img class="nav-avatar__img" src="' +
-              avatarSrc +
-              '" alt="' +
-              username +
-              '">'
-            : '<span class="nav-avatar__initials">' +
-              username.charAt(0).toUpperCase() +
-              "</span>";
+          var avatarHtml = avatarSrc ? '<img class="nav-avatar__img" src="' + avatarSrc + '" alt="' + username + '">' : '<span class="nav-avatar__initials">' + username.charAt(0).toUpperCase() + "</span>";
 
-          $auth.html(
-            '<div class="nav-avatar-wrap">' +
-              '<button class="nav-avatar" id="nav-avatar-btn" aria-expanded="false">' +
-              avatarHtml +
-              "</button>" +
-              '<div class="nav-dropdown" id="nav-dropdown">' +
-              '<a class="nav-dropdown__item" href="/u' +
-              _userdata.user_id +
-              '">Profil</a>' +
-              '<a class="nav-dropdown__item" href="' +
-              _userdata.page_edit_profile +
-              '">Éditer le profil</a>' +
-              '<div class="nav-dropdown__divider"></div>' +
-              '<a class="nav-dropdown__item nav-dropdown__item--danger" href="' +
-              _userdata.page_logout +
-              '">Déconnexion</a>' +
-              "</div>" +
-              "</div>",
-          );
+          $auth.html('<div class="nav-avatar-wrap">' + '<button class="nav-avatar" id="nav-avatar-btn" aria-expanded="false">' + avatarHtml + "</button>" + '<div class="nav-dropdown" id="nav-dropdown">' + '<a class="nav-dropdown__item" href="/u' + _userdata.user_id + '">Profil</a>' + '<a class="nav-dropdown__item" href="' + _userdata.page_edit_profile + '">Éditer le profil</a>' + '<div class="nav-dropdown__divider"></div>' + '<a class="nav-dropdown__item nav-dropdown__item--danger" href="' + _userdata.page_logout + '">Déconnexion</a>' + "</div>" + "</div>");
 
-          $drawerUser.html(
-            '<div class="nav-drawer-user">' +
-              '<div class="nav-drawer-user__avatar">' +
-              avatarHtml +
-              "</div>" +
-              '<span class="nav-drawer-user__name">' +
-              username +
-              "</span>" +
-              "</div>",
-          );
+          $drawerUser.html('<div class="nav-drawer-user">' + '<div class="nav-drawer-user__avatar">' + avatarHtml + "</div>" + '<span class="nav-drawer-user__name">' + username + "</span>" + "</div>");
 
           $("#nav-avatar-btn").on("click", function (e) {
             e.stopPropagation();
@@ -426,25 +115,9 @@
             $("#nav-avatar-btn").attr("aria-expanded", "false");
           });
         } else {
-          $auth.html(
-            '<a class="nav-link nav-link--register" href="' +
-              _userdata.register +
-              '">Inscription</a>' +
-              '<a class="nav-link nav-link--btn" href="' +
-              _userdata.page_login +
-              '">Connexion</a>',
-          );
+          $auth.html('<a class="nav-link nav-link--register" href="' + _userdata.register + '">Inscription</a>' + '<a class="nav-link nav-link--btn" href="' + _userdata.page_login + '">Connexion</a>');
 
-          $drawerAuth.html(
-            '<div style="padding: 16px 24px; border-top: 1px solid rgba(200,169,81,0.15); margin-top: 8px; display: flex; gap: 8px;">' +
-              '<a class="nav-link nav-link--register" href="' +
-              _userdata.register +
-              '">Inscription</a>' +
-              '<a class="nav-link nav-link--btn" href="' +
-              _userdata.page_login +
-              '">Connexion</a>' +
-              "</div>",
-          );
+          $drawerAuth.html('<div style="padding: 16px 24px; border-top: 1px solid rgba(200,169,81,0.15); margin-top: 8px; display: flex; gap: 8px;">' + '<a class="nav-link nav-link--register" href="' + _userdata.register + '">Inscription</a>' + '<a class="nav-link nav-link--btn" href="' + _userdata.page_login + '">Connexion</a>' + "</div>");
         }
 
         function openDrawer() {
@@ -459,28 +132,27 @@
         $("#nav-burger-btn").on("click", openDrawer);
         $("#nav-drawer-close").on("click", closeDrawer);
         $("#nav-overlay").on("click", closeDrawer);
+
+        var $navbar = $("#custom-navbar");
+        $(window).on("scroll", function () {
+          $navbar.toggleClass("is-scrolled", $(window).scrollTop() > 0);
+        });
       });
     </script>
 
-    <div id="wrap">
-      <!-- BEGIN switch_ticker -->
-      <div id="fa_ticker_block">
-        <div class="module">
-          <div class="inner">
-            <div id="fa_ticker_container">
-              <div id="fa_ticker" style="height:{switch_ticker.HEIGHT}px;">
-                <div class="fa_ticker_content">
-                  <!-- BEGIN ticker_row -->
-                  <div>{switch_ticker.ticker_row.ELEMENT}</div>
-                  <!-- END ticker_row -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END switch_ticker -->
+    <div id="banner-background" style="background: url(&quot;https://i.pinimg.com/1200x/60/4f/74/604f74ad57ec55d715cde3c3d1580751.jpg&quot;); position: absolute; top: 0; left: 0; bottom: 0; right: 0; z-index: 0; width: 100%; height: 100vh; background-position: center; background-repeat: no-repeat; background-size: cover"></div>
 
+    <div style="position: relative; width: 100%; max-width: 1140px; margin: 12rem auto">
+      <h1 style="font-size: 60px !important; width: max-content; position: relative; z-index: 1; color: #ffffff !important; letter-spacing: 0px !important">Sengoku no Jidai</h1>
+      <p style="text-align: right; margin-top: 12px; position: relative; z-index: 1">
+        戦国の時代 ·
+        <i>L'Ère des Royaumes en Guerre</i>
+      </p>
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Aperture_Science_Logo.svg/960px-Aperture_Science_Logo.svg.png" alt="" aria-hidden="true" style="position: absolute; top: 50%; left: 8px; transform: translate(-50%, -50%); opacity: 0.15; max-width: 480px; width: 100%; z-index: 0" />
+    </div>
+
+    <div id="wrap">
       <!-- BEGIN html_validation -->
     </div>
     <!-- <div id="wrap" /> -->

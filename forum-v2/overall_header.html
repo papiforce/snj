@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="{L_LANG_HTML}">
+  <head>
+    <meta charset="{S_CONTENT_ENCODING}" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset={S_CONTENT_ENCODING}" />
+
+    <!-- BEGIN switch_canonical_url -->
+    <link rel="canonical" href="{switch_canonical_url.CANONICAL_URL}" />
+    <!-- END switch_canonical_url -->
+
+    {META_FAVICO} {META} {META_FB_LIKE}
+
+    <title>{SITENAME_TITLE}{PAGE_TITLE}</title>
+
+    {T_HEAD_STYLESHEET} {CSS}
+
+    <meta name="theme-color" content="{GG_THEME_COLOR}" />
+
+    <link rel="search" type="application/opensearchdescription+xml" href="/improvedsearch.xml" title="{SITENAME}" />
+    <link rel="search" type="application/opensearchdescription+xml" href="{URL_BOARD_DIRECTORY}/search/improvedsearch.xml" title="{SEARCH_FORUMS}" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Sengoku no Jidai" />
+    <meta property="og:title" content="Sengoku no Jidai — Forum RPG Naruto" />
+    <meta property="og:description" content="Forum de jeu de rôle textuel dans l'univers Naruto. Incarnez un shinobi dans l'ère des royaumes en guerre." />
+    <meta property="og:image" content="https://i.pinimg.com/1200x/60/4f/74/604f74ad57ec55d715cde3c3d1580751.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sengoku no Jidai — Forum RPG Naruto" />
+    <meta name="twitter:description" content="Forum de jeu de rôle textuel dans l'univers Naruto. Incarnez un shinobi dans l'ère des royaumes en guerre." />
+    <meta name="twitter:image" content="https://i.pinimg.com/1200x/60/4f/74/604f74ad57ec55d715cde3c3d1580751.jpg" />
+
+    <!-- Schéma structuré -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Sengoku no Jidai",
+        "description": "Forum de jeu de rôle textuel basé sur l'univers Naruto, dans l'ère des royaumes en guerre.",
+        "inLanguage": "fr-FR",
+        "genre": "Forum RPG"
+      }
+    </script>
+
+    <script src="{JQUERY_PATH}" type="text/javascript"></script>
+    <script src="{JS_DIR}{L_LANG}.js" type="text/javascript"></script>
+
+    {RICH_SNIPPET_GOOGLE} {HOSTING_JS}
+  </head>
+
+  <body id="top">
+    {GREETING_POPUP}
+
+    <!-- ── Navbar ────────────────────────────────────────────── -->
+
+    <nav id="navbar" aria-label="Navigation principale">
+      <div class="navbar-inner">
+        <button class="nav-burger" id="nav-burger-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-drawer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 18L20 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 12L20 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            <path d="M4 6L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+
+        <div class="nav-center">
+          <a class="nav-link" href="{U_INDEX}">Accueil</a>
+          <a class="nav-link" href="/search">Rechercher</a>
+          <a class="nav-link" href="/members">Membres</a>
+        </div>
+
+        <div class="nav-right" id="nav-auth"></div>
+      </div>
+    </nav>
+
+    <!-- ── Overlay drawer ────────────────────────────────────── -->
+
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+    <!-- ── Drawer ────────────────────────────────────────────── -->
+
+    <nav class="nav-drawer" id="nav-drawer" aria-label="Menu principal">
+      <div class="nav-drawer-header">
+        <span class="nav-drawer-logo">Sengoku no Jidai</span>
+        <button class="nav-drawer-close" id="nav-drawer-close" aria-label="Fermer le menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="nav-drawer-links">
+        <a class="nav-drawer-link" href="{U_INDEX}">Accueil</a>
+        <a class="nav-drawer-link" href="/search">Rechercher</a>
+        <a class="nav-drawer-link" href="/members">Membres</a>
+      </div>
+
+      <div id="nav-drawer-auth-block"></div>
+    </nav>
+
+    <!-- ── Hero ──────────────────────────────────────────────── -->
+
+    <section class="hero" style="min-height: 100svh">
+      <img class="hero__img" src="https://i.pinimg.com/1200x/60/4f/74/604f74ad57ec55d715cde3c3d1580751.jpg" alt="Paysage féodal japonais — Sengoku no Jidai" fetchpriority="high" />
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <span class="hero__eyebrow">戦国の時代</span>
+        <h1 class="hero__titre">Sengoku no Jidai</h1>
+        <p class="hero__sous">L'Ère des Royaumes en Guerre</p>
+
+        <div class="ornement">
+          <div class="ornement__ligne"></div>
+          <span class="ornement__symbole" aria-hidden="true">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#fff" viewBox="0 0 500 500"><path d="M228.5 9c-11.3 1-33.7 5.3-45.2 8.6-11.1 3.2-20.3 6.5-20.3 7.3 0 .3 3.5 2.9 7.8 5.8C175 33.6 187.3 42 198 49.4c10.7 7.4 27.4 18.8 37 25.3 21.6 14.6 61.5 41.6 89.8 60.8 11.6 8 21.2 13.9 21.2 13.2 0-.6-2.5-14-5.6-29.7-3-15.7-5.9-30.8-6.4-33.5-.5-2.8-3.4-18.2-6.4-34.4-3.1-16.2-5.6-29.8-5.6-30.2 0-2.5-15.3-6.8-35.3-10-14-2.2-44.5-3.2-58.2-1.9zM345.7 28.6c-.2.3-.1 2.2.4 4.2.4 2 1.5 7.5 2.4 12.2.8 4.7 2.6 14.1 4 21 3.7 19.3 10.1 53 13 68.5 1.4 7.7 3.2 17.1 4 21 .7 3.8 2.1 11 3 16 .9 4.9 2 11 2.5 13.5 1.6 7.8 6 32 8.3 45.4 1.2 7.1 2.7 13.1 3.2 13.2 1.3.4 6-6.5 49.7-71.2 10.8-16 21.1-31.2 22.8-33.6 3.2-4.5 3.2-4.5 1.4-7.9-2.5-5-15-23.4-20.8-30.9C419 73.6 392.4 51.7 362 35.9c-12.5-6.5-15.6-7.9-16.3-7.3zM127 41.7c-24.1 14.4-46.7 33.8-62.9 53.9-7.3 9-17.8 24-22.1 31.4-5.3 9.3-14.3 28.1-13.6 28.7.6.7-.2.8 61.1-11.2 78.9-15.5 139.4-27.3 149.3-29.2 5-.9 9.2-2.2 9.2-2.8 0-.6-1.3-1.8-2.9-2.8-3-1.8-59.5-40.3-89.8-61.1-10-6.9-18.3-12.6-18.5-12.6-.2 0-4.6 2.6-9.8 5.7zM116 161.4c-36.5 7.4-47 9.5-74.4 14.7-11.5 2.1-21.5 4.4-22.2 5-1.5 1.2-5.7 18.7-8 33.4-2.5 16-3 46.6-.9 62.1 1.9 14.9 6.3 36 9.5 45.4 3.7 11.3 7.3 20.1 8.1 19.8.4-.2 13.5-19.4 29-42.8s43.2-65.1 61.5-92.7c18.4-27.6 33.4-50.4 33.4-50.7 0-1.2-6.3-.2-36 5.8zM466 167.7c-3.6 5.3-6.9 10.1-7.5 10.7-.5.6-3.1 4.2-5.7 8.1-2.5 3.8-7.3 10.8-10.5 15.5-6.8 9.8-33.1 48.8-65.8 97.5-12.5 18.7-24.4 36.2-26.3 38.8-1.9 2.6-3.2 5.1-2.8 5.4.3.3 14.8-2.2 32.3-5.6 46.8-9.2 81.9-15.9 94.6-18.1 4.3-.8 7.1-1.8 7.6-2.9 2.8-5.5 7.4-32.2 9.2-53.1 2.2-26-2-60-10.7-87.3-3.6-11.4-6.4-18.7-7.2-18.7-.4 0-3.7 4.3-7.2 9.7zM88.8 290.4c-14.7 22-31.9 48.2-38.3 58L39 366.3l2.7 4.6c20.6 35.5 54.3 68.8 89.9 88.7 10.5 5.9 23.9 12.2 24.6 11.6.4-.4.3-2.5-.2-4.7s-3.4-17.7-6.5-34.5c-3-16.8-6.1-33.9-7-38-.8-4.1-2.4-12.7-3.4-19-1.1-6.3-3.1-17.6-4.5-25-1.4-7.4-4.5-24.8-7-38.5-2.5-13.8-5.7-30.9-7.1-38-1.3-7.2-2.7-14.8-3.1-17-.4-2.2-.9-4.5-1.3-5.1-.3-.7-12.6 16.9-27.3 39zM468.5 342.6c-1.1.3-3.8.9-6 1.4-4.9 1.1-83.6 16.5-110 21.5-10.4 2-23.3 4.4-28.5 5.5-5.2 1-16.9 3.3-26 5-9.1 1.7-22.2 4.2-29.2 5.6-6.9 1.3-13.6 2.4-14.7 2.4-6 0-2.6 2.5 71.9 52.5 15.7 10.5 30.8 20.6 33.7 22.4l5.2 3.2 4.8-2.6c8.1-4.6 26.4-17.4 34.8-24.5 26.7-22.6 45.4-46 61.5-77.3 6.3-12.2 7.5-16 5.2-15.6-.4.1-1.6.3-2.7.5zM156.4 350.7c.2 1 1.6 8.1 3.1 15.8 1.4 7.7 3.2 17.1 4 21 1.4 6.8 2.7 13.7 4.5 24 .5 2.7 2.1 11.3 3.5 19 1.4 7.7 3.9 21.8 5.5 31.4 1.6 9.5 3.2 17.7 3.7 18.1.4.5 3.3 1.5 6.3 2.4 31.7 9.4 79.9 10.8 112.5 3.4 17.2-3.9 40.6-11.2 40.5-12.7-.1-.8-51.3-35.8-114-77.9-18.4-12.4-41.4-27.9-51.1-34.4-9.7-6.5-17.9-11.8-18.3-11.8-.4 0-.5.8-.2 1.7z" /></svg>
+          </span>
+          <div class="ornement__ligne"></div>
+        </div>
+      </div>
+
+      <a class="social-float" href="https://discord.gg/bnK7vyGjXV" target="_blank" rel="noopener noreferrer" aria-label="Rejoindre le serveur Discord de Sengoku no Jidai">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.014.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" /></svg>
+      </a>
+    </section>
+
+    <!-- ── Scripts ───────────────────────────────────────────── -->
+
+    <script type="text/javascript">
+      $(function () {
+        var $auth = $("#nav-auth");
+        var $drawerAuth = $("#nav-drawer-auth-block");
+
+        if (_userdata.session_logged_in == 1) {
+          var avatarSrc = _userdata.avatar_link;
+          var username = _userdata.username;
+          var avatarHtml = avatarSrc ? '<img class="nav-avatar__img" src="' + avatarSrc + '" alt="' + username + '">' : '<span class="nav-avatar__initials">' + username.charAt(0).toUpperCase() + "</span>";
+
+          $auth.html('<div class="nav-avatar-wrap">' + '<button class="nav-avatar" id="nav-avatar-btn" aria-expanded="false">' + avatarHtml + "</button>" + '<div class="nav-dropdown" id="nav-dropdown">' + '<a class="nav-dropdown__item" href="/u' + _userdata.user_id + '">Profil</a>' + '<a class="nav-dropdown__item" href="' + _userdata.page_edit_profile + '">Éditer le profil</a>' + '<div class="nav-dropdown__divider"></div>' + '<a class="nav-dropdown__item nav-dropdown__item--danger" href="' + _userdata.page_logout + '">Déconnexion</a>' + "</div>" + "</div>");
+
+          $drawerAuth.html('<div class="nav-drawer-user">' + '<div class="nav-drawer-user__avatar">' + avatarHtml + "</div>" + '<span class="nav-drawer-user__name">' + username + "</span>" + "</div>");
+
+          $("#nav-avatar-btn").on("click", function (e) {
+            e.stopPropagation();
+            var $dd = $("#nav-dropdown");
+            var open = $dd.hasClass("is-open");
+            $dd.toggleClass("is-open", !open);
+            $(this).attr("aria-expanded", String(!open));
+          });
+
+          $(document).on("click", function () {
+            $("#nav-dropdown").removeClass("is-open");
+            $("#nav-avatar-btn").attr("aria-expanded", "false");
+          });
+        } else {
+          var authHtml = '<a class="nav-link nav-link--register" href="' + _userdata.register + '">Inscription</a>' + '<a class="nav-link nav-link--btn" href="' + _userdata.page_login + '">Connexion</a>';
+
+          $auth.html(authHtml);
+          $drawerAuth.html('<div class="nav-drawer-footer">' + authHtml + "</div>");
+        }
+
+        /* Drawer */
+        function openDrawer() {
+          $("#nav-drawer").addClass("is-open");
+          $("#nav-overlay").addClass("is-open");
+          $("#nav-burger-btn").attr("aria-expanded", "true");
+        }
+        function closeDrawer() {
+          $("#nav-drawer").removeClass("is-open");
+          $("#nav-overlay").removeClass("is-open");
+          $("#nav-burger-btn").attr("aria-expanded", "false");
+        }
+
+        $("#nav-burger-btn").on("click", openDrawer);
+        $("#nav-drawer-close").on("click", closeDrawer);
+        $("#nav-overlay").on("click", closeDrawer);
+
+        /* Navbar scroll */
+        var $navbar = $("#navbar");
+        $(window).on("scroll", function () {
+          $navbar.toggleClass("is-scrolled", $(window).scrollTop() > 0);
+        });
+      });
+    </script>
+
+    <div id="wrap">
+      <!-- BEGIN html_validation -->
+    </div>
+    <!-- <div id="wrap" /> -->
+  </body>
+</html>
+<!-- END html_validation -->
