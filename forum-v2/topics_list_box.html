@@ -3,192 +3,95 @@
 <!-- BEGIN header_table -->
 <!-- BEGIN multi_selection -->
 <script type="text/javascript">
-
-  function check_uncheck_main_{topics_list_box.row.header_table.BOX_ID}()
-  {
-      alert('MAIN');
-
-      var all_checked = true;
-
-      for (i = 0; (i < document.{topics_list_box.FORMNAME}.elements.length) && all_checked; i++)
-      {
-          if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}')
-          {
-              all_checked = document.{topics_list_box.FORMNAME}.elements[i].checked;
-          }
+  function check_uncheck_main_{topics_list_box.row.header_table.BOX_ID}() {
+    var all_checked = true;
+    for (i = 0; (i < document.{topics_list_box.FORMNAME}.elements.length) && all_checked; i++) {
+      if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}') {
+        all_checked = document.{topics_list_box.FORMNAME}.elements[i].checked;
       }
-
-      document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked = all_checked;
+    }
+    document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked = all_checked;
   }
-
-  function check_uncheck_all_{topics_list_box.row.header_table.BOX_ID}()
-  {
-      alert('ALL');
-
-      for (i = 0; i < document.{topics_list_box.FORMNAME}.length; i++)
-      {
-          if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}')
-          {
-              document.{topics_list_box.FORMNAME}.elements[i].checked = document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked;
-          }
+  function check_uncheck_all_{topics_list_box.row.header_table.BOX_ID}() {
+    for (i = 0; i < document.{topics_list_box.FORMNAME}.length; i++) {
+      if (document.{topics_list_box.FORMNAME}.elements[i].name == '{topics_list_box.FIELDNAME}[]{topics_list_box.row.header_table.BOX_ID}') {
+        document.{topics_list_box.FORMNAME}.elements[i].checked = document.{topics_list_box.FORMNAME}.all_mark_{topics_list_box.row.header_table.BOX_ID}.checked;
       }
+    }
   }
 </script>
 <!-- END multi_selection -->
 
-<div class="posts">
-  <div class="posts-header">
-    <h2 class="posts-title">
-      <i class="material-icons">{topics_list_box.row.ICON}</i>
-      <span>{topics_list_box.row.L_TITLE}</span>
-    </h2>
-    <div class="posts-statistics-header">
-      <span class="posts-statistics-header-replies">
-        <i class="material-icons" data-tooltip="{topics_list_box.row.L_REPLIES}"
-          >forum</i
-        >
-      </span>
-      <span class="posts-statistics-header-views">
-        <i class="material-icons" data-tooltip="{topics_list_box.row.L_VIEWS}"
-          >remove_red_eye</i
-        >
-      </span>
-    </div>
-    <div class="posts-lastpost-header">
-      <i class="material-icons">watch_later</i>
-      <span>{topics_list_box.row.L_LASTPOST}</span>
-    </div>
-  </div>
+<div class="vf-section">
   <!-- END header_table -->
 
   <!-- BEGIN header_row -->
-  <strong>{topics_list_box.row.L_TITLE}</strong>
   <!-- END header_row -->
 
   <!-- BEGIN topic -->
   <!-- BEGIN table_sticky -->
 </div>
-<!-- <div class="posts" /> -->
-<div class="posts">
-  <div class="posts-header">
-    <h2 class="posts-title">
-      <i class="material-icons">description</i>
-      <span>{topics_list_box.row.topic.table_sticky.L_TITLE}</span>
-    </h2>
-    <div class="posts-statistics-header">
-      <span class="posts-statistics-header-replies">
-        <i
-          class="material-icons"
-          data-tooltip="{topics_list_box.row.topic.table_sticky.L_REPLIES}"
-          >forum</i
-        >
-      </span>
-      <span class="posts-statistics-header-views">
-        <i
-          class="material-icons"
-          data-tooltip="{topics_list_box.row.topic.table_sticky.L_VIEWS}"
-          >remove_red_eye</i
-        >
-      </span>
-    </div>
-    <div class="posts-lastpost-header">
-      <i class="material-icons">watch_later</i>
-      <span>{topics_list_box.row.topic.table_sticky.L_LASTPOST}</span>
-    </div>
+<div class="vf-section">
+  <div class="vf-section__header vf-section__header--sticky">
+    <span class="vf-section__titre">{topics_list_box.row.topic.table_sticky.L_TITLE}</span>
   </div>
   <!-- END table_sticky -->
   <!-- BEGIN line_sticky -->
-  <div class="sticky-separator posts-header"></div>
   <!-- END line_sticky -->
-  <div class="posts-section">
-    <div
-      class="posts-icon {topics_list_box.row.FOLDER_CLASSNAME} {topics_list_box.row.TOPIC_READ_STATUS}"
-      title="{topics_list_box.row.L_TOPIC_FOLDER_ALT}"
-    >
-      <i class="material-icons">chat_bubble</i>
-      <div class="participate-check">
-        {topics_list_box.row.PARTICIPATE_POST_IMG}
-      </div>
-    </div>
-    <div class="posts-content">
-      <div class="posts-description" {topics_list_box.row.ICON}>
-        <h3>
-          <!-- BEGIN single_selection -->
-          <span class="radio">
-            <input
-              type="radio"
-              name="{topics_list_box.FIELDNAME}"
-              value="{topics_list_box.row.FID}"
-              {topics_list_box.row.L_SELECT}
-            />
-            <span class="radio-check"></span>
-          </span>
-          <!-- END single_selection -->
-          {topics_list_box.row.TOPIC_TYPE}
-          <a href="{topics_list_box.row.U_VIEW_TOPIC}"
-            >{topics_list_box.row.TOPIC_TITLE}</a
-          >
-        </h3>
-        <!-- BEGIN switch_description -->
-        <span class="topic-description">
-          {topics_list_box.row.topic.switch_description.TOPIC_DESCRIPTION}
+
+  <div class="vf-topic {topics_list_box.row.FOLDER_CLASSNAME} {topics_list_box.row.TOPIC_READ_STATUS}">
+    <div class="vf-topic__main">
+      <h3 class="vf-topic__titre">
+        <!-- BEGIN single_selection -->
+        <span class="radio">
+          <input type="radio" name="{topics_list_box.FIELDNAME}" value="{topics_list_box.row.FID}" {topics_list_box.row.L_SELECT} />
+          <span class="radio-check"></span>
         </span>
-        <!-- END switch_description -->
-        <p>
-          {topics_list_box.row.L_BY} {topics_list_box.row.TOPIC_AUTHOR}
-          {topics_list_box.row.GOTO_PAGE_NEW}
-        </p>
-      </div>
-      <div class="posts-statistics">
-        <span class="posts-statistics-replies"
-          >{topics_list_box.row.REPLIES} <span>{L_REPLIES}</span></span
-        >
-        <span class="posts-statistics-views"
-          >{topics_list_box.row.VIEWS} <span>{L_VIEWS}</span></span
-        >
-      </div>
-      <div class="posts-lastpost">
-        <div class="avatar-default">
-          <!-- BEGIN avatar -->
-          {topics_list_box.row.topic.avatar.LAST_POST_AVATAR}
-          <!-- END avatar -->
+        <!-- END single_selection -->
+        {topics_list_box.row.TOPIC_TYPE}
+        <a href="{topics_list_box.row.U_VIEW_TOPIC}">{topics_list_box.row.TOPIC_TITLE}</a>
+      </h3>
+
+      <!-- BEGIN switch_description -->
+      <span class="vf-topic__desc">{topics_list_box.row.topic.switch_description.TOPIC_DESCRIPTION}</span>
+      <!-- END switch_description -->
+
+      <div>
+        <p class="vf-topic__meta posts-description">{topics_list_box.row.L_BY} {topics_list_box.row.TOPIC_AUTHOR} {topics_list_box.row.GOTO_PAGE_NEW}</p>
+
+        <div class="vf-topic__stat-item">
+          <span class="vf-topic__stat">{topics_list_box.row.REPLIES}</span>
+          <span class="vf-topic__stat-label">{L_REPLIES}</span>
         </div>
-        <div class="posts-lastpost-inner">
-          <!-- BEGIN switch_topic_title -->
-          <a class="topic-title" href="{topics_list_box.row.LAST_POST_IMG}"
-            >{catrow.forumrow.LATEST_TOPIC_NAME}</a
-          >
-          <!-- END switch_topic_title -->
-          <span>
-            <span class="posts-lastpost-author">
-              <i class="material-icons">person</i
-              >{topics_list_box.row.LAST_POST_AUTHOR}
-            </span>
-            <a
-              class="posts-lastpost-time"
-              href="{topics_list_box.row.LAST_POST_IMG}"
-            >
-              <i class="material-icons">access_time</i
-              >{topics_list_box.row.LAST_POST_TIME}
-            </a>
-          </span>
+
+        <div class="vf-topic__stat-item">
+          <span class="vf-topic__stat">{topics_list_box.row.VIEWS}</span>
+          <span class="vf-topic__stat-label">{L_VIEWS}</span>
         </div>
       </div>
-      <!-- BEGIN multi_selection -->
-      <input
-        onclick="javascript:check_uncheck_main_{topics_list_box.row.BOX_ID}();"
-        type="checkbox"
-        name="{topics_list_box.FIELDNAME}[]{topics_list_box.row.BOX_ID}"
-        value="{topics_list_box.row.FID}"
-        {topics_list_box.row.L_SELECT}
-      />
-      <!-- END multi_selection -->
     </div>
+
+    <div class="vf-topic__last">
+      <!-- BEGIN avatar -->
+      <div class="vf-topic__last-avatar">{topics_list_box.row.topic.avatar.LAST_POST_AVATAR}</div>
+      <!-- END avatar -->
+
+      <div class="vf-topic__last-info">
+        <span class="vf-topic__last-author">{topics_list_box.row.LAST_POST_AUTHOR}</span>
+        <a class="vf-topic__last-time" href="{topics_list_box.row.LAST_POST_IMG}">{topics_list_box.row.LAST_POST_TIME}</a>
+      </div>
+    </div>
+
+    <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#c9a96e" viewBox="0 0 500 500"><path d="M228.5 9c-11.3 1-33.7 5.3-45.2 8.6-11.1 3.2-20.3 6.5-20.3 7.3 0 .3 3.5 2.9 7.8 5.8C175 33.6 187.3 42 198 49.4c10.7 7.4 27.4 18.8 37 25.3 21.6 14.6 61.5 41.6 89.8 60.8 11.6 8 21.2 13.9 21.2 13.2 0-.6-2.5-14-5.6-29.7-3-15.7-5.9-30.8-6.4-33.5-.5-2.8-3.4-18.2-6.4-34.4-3.1-16.2-5.6-29.8-5.6-30.2 0-2.5-15.3-6.8-35.3-10-14-2.2-44.5-3.2-58.2-1.9zM345.7 28.6c-.2.3-.1 2.2.4 4.2.4 2 1.5 7.5 2.4 12.2.8 4.7 2.6 14.1 4 21 3.7 19.3 10.1 53 13 68.5 1.4 7.7 3.2 17.1 4 21 .7 3.8 2.1 11 3 16 .9 4.9 2 11 2.5 13.5 1.6 7.8 6 32 8.3 45.4 1.2 7.1 2.7 13.1 3.2 13.2 1.3.4 6-6.5 49.7-71.2 10.8-16 21.1-31.2 22.8-33.6 3.2-4.5 3.2-4.5 1.4-7.9-2.5-5-15-23.4-20.8-30.9C419 73.6 392.4 51.7 362 35.9c-12.5-6.5-15.6-7.9-16.3-7.3zM127 41.7c-24.1 14.4-46.7 33.8-62.9 53.9-7.3 9-17.8 24-22.1 31.4-5.3 9.3-14.3 28.1-13.6 28.7.6.7-.2.8 61.1-11.2 78.9-15.5 139.4-27.3 149.3-29.2 5-.9 9.2-2.2 9.2-2.8 0-.6-1.3-1.8-2.9-2.8-3-1.8-59.5-40.3-89.8-61.1-10-6.9-18.3-12.6-18.5-12.6-.2 0-4.6 2.6-9.8 5.7zM116 161.4c-36.5 7.4-47 9.5-74.4 14.7-11.5 2.1-21.5 4.4-22.2 5-1.5 1.2-5.7 18.7-8 33.4-2.5 16-3 46.6-.9 62.1 1.9 14.9 6.3 36 9.5 45.4 3.7 11.3 7.3 20.1 8.1 19.8.4-.2 13.5-19.4 29-42.8s43.2-65.1 61.5-92.7c18.4-27.6 33.4-50.4 33.4-50.7 0-1.2-6.3-.2-36 5.8zM466 167.7c-3.6 5.3-6.9 10.1-7.5 10.7-.5.6-3.1 4.2-5.7 8.1-2.5 3.8-7.3 10.8-10.5 15.5-6.8 9.8-33.1 48.8-65.8 97.5-12.5 18.7-24.4 36.2-26.3 38.8-1.9 2.6-3.2 5.1-2.8 5.4.3.3 14.8-2.2 32.3-5.6 46.8-9.2 81.9-15.9 94.6-18.1 4.3-.8 7.1-1.8 7.6-2.9 2.8-5.5 7.4-32.2 9.2-53.1 2.2-26-2-60-10.7-87.3-3.6-11.4-6.4-18.7-7.2-18.7-.4 0-3.7 4.3-7.2 9.7zM88.8 290.4c-14.7 22-31.9 48.2-38.3 58L39 366.3l2.7 4.6c20.6 35.5 54.3 68.8 89.9 88.7 10.5 5.9 23.9 12.2 24.6 11.6.4-.4.3-2.5-.2-4.7s-3.4-17.7-6.5-34.5c-3-16.8-6.1-33.9-7-38-.8-4.1-2.4-12.7-3.4-19-1.1-6.3-3.1-17.6-4.5-25-1.4-7.4-4.5-24.8-7-38.5-2.5-13.8-5.7-30.9-7.1-38-1.3-7.2-2.7-14.8-3.1-17-.4-2.2-.9-4.5-1.3-5.1-.3-.7-12.6 16.9-27.3 39zM468.5 342.6c-1.1.3-3.8.9-6 1.4-4.9 1.1-83.6 16.5-110 21.5-10.4 2-23.3 4.4-28.5 5.5-5.2 1-16.9 3.3-26 5-9.1 1.7-22.2 4.2-29.2 5.6-6.9 1.3-13.6 2.4-14.7 2.4-6 0-2.6 2.5 71.9 52.5 15.7 10.5 30.8 20.6 33.7 22.4l5.2 3.2 4.8-2.6c8.1-4.6 26.4-17.4 34.8-24.5 26.7-22.6 45.4-46 61.5-77.3 6.3-12.2 7.5-16 5.2-15.6-.4.1-1.6.3-2.7.5zM156.4 350.7c.2 1 1.6 8.1 3.1 15.8 1.4 7.7 3.2 17.1 4 21 1.4 6.8 2.7 13.7 4.5 24 .5 2.7 2.1 11.3 3.5 19 1.4 7.7 3.9 21.8 5.5 31.4 1.6 9.5 3.2 17.7 3.7 18.1.4.5 3.3 1.5 6.3 2.4 31.7 9.4 79.9 10.8 112.5 3.4 17.2-3.9 40.6-11.2 40.5-12.7-.1-.8-51.3-35.8-114-77.9-18.4-12.4-41.4-27.9-51.1-34.4-9.7-6.5-17.9-11.8-18.3-11.8-.4 0-.5.8-.2 1.7z" /></svg>
+
+    <!-- BEGIN multi_selection -->
+    <input onclick="javascript:check_uncheck_main_{topics_list_box.row.BOX_ID}();" type="checkbox" name="{topics_list_box.FIELDNAME}[]{topics_list_box.row.BOX_ID}" value="{topics_list_box.row.FID}" {topics_list_box.row.L_SELECT} />
+    <!-- END multi_selection -->
   </div>
   <!-- END topic -->
 
   <!-- BEGIN no_topics -->
-  <div class="posts-section posts-empty">{topics_list_box.row.L_NO_TOPICS}</div>
+  <div class="vf-topic vf-topic--empty">{topics_list_box.row.L_NO_TOPICS}</div>
   <!-- END no_topics -->
 
   <!-- BEGIN bottom -->
@@ -196,36 +99,3 @@
 <!-- END bottom -->
 <!-- END row -->
 <!-- END topics_list_box -->
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    $(".posts-icon").each(function () {
-      if (!$(this).find(".participate-check").is(":empty")) {
-        $(this)
-          .find(".participate-check")
-          .html(
-            '<i class="material-icons" title="' +
-              $(this).find(".participate-check").children("img").attr("title") +
-              '">reply</i>',
-          );
-      }
-    });
-
-    $(".posts-description").each(function () {
-      var background_image = "";
-      if ($(this).attr("style")) {
-        background_image = $(this)
-          .attr("style")
-          .replace(/background-image: url\(|\);/g, "");
-        $(this)
-          .children("h3")
-          .prepend('<img class="topic-icon" src="' + background_image + '" />');
-        $(this).attr("style", "");
-      }
-    });
-
-    $(".posts-description .pagination").each(function () {
-      $(this).children().addClass($(this).attr("class")).unwrap();
-    });
-  });
-</script>
