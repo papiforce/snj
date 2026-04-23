@@ -1318,6 +1318,10 @@ body {
   padding: 0 !important;
 }
 
+#page-footer ul.linklist.footer-to-top {
+  display: none !important;
+}
+
 #page-footer .navbar::after,
 #page-footer ul.linklist::after {
   display: none !important;
